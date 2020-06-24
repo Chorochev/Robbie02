@@ -1,6 +1,6 @@
 // Settings.h - Класс для глобальных настроек
-#ifndef PROJECT_SETTINGS_H
-#define PROJECT_SETTINGS_H
+#ifndef PROJECT_SYSTEM_SETTINGS_H
+#define PROJECT_SYSTEM_SETTINGS_H
 
 #include <map>
 #include <string>

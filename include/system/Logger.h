@@ -1,6 +1,6 @@
 // Logger.h - Класс для логирования
-#ifndef PROJECT_LOGGER_H
-#define PROJECT_LOGGER_H
+#ifndef PROJECT_SYSTEM_LOGGER_H
+#define PROJECT_SYSTEM_LOGGER_H
 
 #include <map>
 #include <string>
