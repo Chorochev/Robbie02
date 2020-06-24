@@ -1,0 +1,28 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+            "type": "shell",
+            "label": "C/C++: g++ build active file",
+            "command": "C:/MyProgramms/MinGW/bin/g++",
+            "args": [
+                "-g",
+                "${workspaceRoot}/Robbie.cpp",
+                "-o",
+                "${workspaceRoot}/bin/Robbie.exe",
+                "-I",
+                "${workspaceRoot}/include" 
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+	]
+}
