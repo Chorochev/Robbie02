@@ -11,6 +11,7 @@
                 "${workspaceRoot}/source/*.cpp",
                 "${workspaceRoot}/source/system/*.cpp",
                 "${workspaceRoot}/source/windows/*.cpp",
+                "${workspaceRoot}/source/geometry/*.cpp",
                 "-o",
                 "${workspaceRoot}/bin/Robbie.exe",
                 "-I",
