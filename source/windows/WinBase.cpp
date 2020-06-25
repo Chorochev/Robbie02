@@ -11,6 +11,7 @@ namespace robbiespace
     // posY - Позиция окна по OY
     WinBase::WinBase(string name, string m, int width, int height, int posX, int posY)
     {
+        idWindow = 0;
         // Имя окна
         //string strWindowName = "sWindowName";
         strWindowName += m;

@@ -18,6 +18,7 @@ namespace robbiespace
         string strWindowPositionY = "iWindowPositionY";   // Наименование ключа для значения - Позиция окна по OY
 
     protected:
+        int idWindow; // Идентификатор окна
         // Наименование окна
         string sNameWindow;
         // Размер окна

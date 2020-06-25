@@ -16,9 +16,9 @@ namespace robbiespace
     {
         loadMessages();
         loadErrors();
-        if (filesystem::exists(NAMEDIRFORLOGS) == 0)
+        if (std::filesystem::exists(NAMEDIRFORLOGS) == 0)
         {
-            filesystem::create_directory(NAMEDIRFORLOGS);
+            std::filesystem::create_directory(NAMEDIRFORLOGS);
         }
         WriteLog(1);
     }
@@ -146,7 +146,7 @@ namespace robbiespace
         _messages.insert(pair<int, string>(1, "Start log"));
         _messages.insert(pair<int, string>(2, "End log"));
     }
-    
+
     // Загрузка ошибок
     void Logger::loadErrors()
     {

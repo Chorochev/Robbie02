@@ -1,13 +1,14 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
+    "version": "2.0.0",
+    "tasks": [
+        {
             "type": "shell",
-            "label": "C/C++: g++ build active file",
-            "command": "C:/MyProgramms/MinGW/bin/g++",
+            "label": "C:/MinGW/bin/g++.exe build",
+            "command": "C:/MinGW/bin/g++.exe",
             "args": [
                 "-g",
-                "${workspaceRoot}/Robbie.cpp",                
+                "${workspaceRoot}/Robbie.cpp",
+                "${workspaceRoot}/source/*.cpp",
                 "${workspaceRoot}/source/system/*.cpp",
                 "${workspaceRoot}/source/windows/*.cpp",
                 "-o",
@@ -17,12 +18,19 @@
                 "-I",
                 "${workspaceRoot}/include/system",
                 "-I",
-                "${workspaceRoot}/include/windows",
+                "${workspaceRoot}/source/windows",
+                "-I",
+                "C:/MinGW/freeglut/include",
+                "-L",
+                "C:/MinGW/freeglut/lib",
+                "-lfreeglut",
+                "-lopengl32",
+                "-lglu32",
                 "-std=c++17",
-                "-lstdc++",
+                "-lstdc++"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceRoot}/bin"
             },
             "problemMatcher": [
                 "$gcc"
@@ -30,7 +38,7 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
         },
-	]
+    ]
 }
