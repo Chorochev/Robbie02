@@ -13,5 +13,7 @@ namespace robbiespace
         void Floor(); // Пол
     };
 
+    extern World rob_GlobalWorld;
+
 } // namespace robbiespace
 #endif

@@ -15,6 +15,7 @@ namespace robbiespace
 
         void Create();      // Создание окна
         void DisplayFunc(); // Функция рисования
+        void ReshapeFunc(int width, int height); //Функция изменения размеров окна
     };
 
 } // namespace robbiespace
