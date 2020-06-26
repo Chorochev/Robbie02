@@ -33,8 +33,8 @@ namespace robbiespace
                   0.0f, 0.0f, 0.0f,
                   0.0f, 1.0f, 0.0f);
 
-        glPushMatrix();
-        rob_GlobalWorld.Floor();
+        glPushMatrix();        
+        worldScena->Floor();
         glPopMatrix();
         // Переключение буферов
         glutSwapBuffers();
@@ -86,8 +86,10 @@ namespace robbiespace
     /////////////////////////////////////////////////////////////////////////////////////
 
     // Создание основного окна
-    void WinMain::Create()
+    void WinMain::Create(World *world)
     {
+        worldScena = world;
+
         // GLUT_DEPTH - Буфер глубины. Используется для отсечения невидимых линий в 3D пространстве при выводе на плоский экран монитора.
         // GLUT_DOUBLE - Двойная буферизация.
         // GLUT_RGB - Цвет состоит из 3х компонентов цвета RGB.

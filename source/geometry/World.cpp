@@ -3,9 +3,7 @@
 #include <geometry/World.h>
 
 namespace robbiespace
-{
-    World rob_GlobalWorld;
-
+{    
     World::World()
     {
     }
