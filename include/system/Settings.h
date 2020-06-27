@@ -13,6 +13,7 @@ namespace robbiespace
     {
         private:        
         map<string, int> _listInt; // Словарь настроек типа int
+        map<string, char> _listChar; // Словарь настроек типа char
         map<string, float> _listFloat; // Словарь настроек типа float
         map<string, double> _listDouble; // Словарь настроек типа double
         map<string, string> _listString; // Словарь настроек типа string
@@ -24,6 +25,8 @@ namespace robbiespace
         ~Settings();
         // Получение значения настройки типа int, если нет такого значения то добавляется значение по умолчанию
         int GetSettingOrDefault(string name, int defaultValue);
+        // Получение значения настройки типа char, если нет такого значения то добавляется значение по умолчанию
+        char GetSettingOrDefault(string name, char defaultValue);
         // Получение значения настройки типа float, если нет такого значения то добавляется значение по умолчанию
         double GetSettingOrDefault(string name, float defaultValue);
         // Получение значения настройки типа double, если нет такого значения то добавляется значение по умолчанию
@@ -36,6 +39,8 @@ namespace robbiespace
         void LoadFromFile();
         // Изменение параметра настройки типа int
         void SetValue(string name, int newValue);
+        // Изменение параметра настройки типа char
+        void SetValue(string name, char newValue);
         // Изменение параметра настройки типа float
         void SetValue(string name, float newValue);
         // Изменение параметра настройки типа double

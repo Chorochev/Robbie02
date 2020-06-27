@@ -1,3 +1,4 @@
+#include <GL/glut.h>
 #include <system/Settings.h>
 #include <windows/WinBase.h>
 
@@ -40,6 +41,12 @@ namespace robbiespace
         globalSettings.SetValue(strWindowSizeHeight, iWindowSizeHeight);
         globalSettings.SetValue(strWindowPositionX, iWindowPositionX);
         globalSettings.SetValue(strWindowPositionY, iWindowPositionY);
+    }
+
+    // Закрыть окно
+    void WinBase::CloseWindow()
+    {
+        glutDestroyWindow(idWindow);
     }
 
 } // namespace robbiespace

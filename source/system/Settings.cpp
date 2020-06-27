@@ -35,6 +35,22 @@ namespace robbiespace
         }
     }
 
+    // Получение значения настройки типа char, если нет такого значения то добавляется значение по умолчанию
+    char Settings::GetSettingOrDefault(string name, char defaultValue)
+    {
+        map<string, char>::iterator it;
+        it = _listChar.find(name);
+        if (it != _listChar.end())
+        {
+            return it->second;
+        }
+        else
+        {
+            _listChar.insert(pair<string, char>(name, defaultValue));
+            return defaultValue;
+        }
+    }
+
     // Получение значения настройки типа float, если нет такого значения то добавляется значение по умолчанию
     double Settings::GetSettingOrDefault(string name, float defaultValue)
     {
@@ -102,6 +118,15 @@ namespace robbiespace
             out << name << " " << value << std::endl;
             itInt++;
         }
+        // Записываем настройки типа char
+        map<string, char>::iterator itChar = _listChar.begin();
+        while (itChar != _listChar.end())
+        {
+            string name = itChar->first;
+            char value = itChar->second;
+            out << name << " " << value << std::endl;
+            itChar++;
+        }
         // Записываем настройки типа float
         map<string, float>::iterator itFloat = _listFloat.begin();
         while (itFloat != _listFloat.end())
@@ -145,6 +170,7 @@ namespace robbiespace
         string nameValue;
         char firstChar;
         int intValue;
+        char charValue;
         float floatValue;
         double doubleValue;
         string stringValue;
@@ -161,6 +187,10 @@ namespace robbiespace
                 case 'i':
                     in >> intValue;
                     GetSettingOrDefault(nameValue, (int)intValue);
+                    break;
+                case 'c':
+                    in >> charValue;
+                    GetSettingOrDefault(nameValue, (char)charValue);
                     break;
                 case 'f':
                     in >> floatValue;
@@ -190,6 +220,17 @@ namespace robbiespace
         map<string, int>::iterator it;
         it = _listInt.find(name);
         if (it != _listInt.end())
+        {
+            it->second = newValue;
+        }
+    }
+
+    // Изменение параметра настройки типа char
+    void Settings::SetValue(string name, char newValue)
+    {
+        map<string, char>::iterator it;
+        it = _listChar.find(name);
+        if (it != _listChar.end())
         {
             it->second = newValue;
         }

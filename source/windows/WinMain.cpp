@@ -1,4 +1,3 @@
-//#include <GL/glu.h>
 #include <GL/glut.h>
 #include <GL/freeglut.h>
 #include <windows/WinMain.h>
@@ -22,7 +21,6 @@ namespace robbiespace
     // Функция рисования
     void WinMain::DisplayFunc()
     {
-        ///*
         glutSetWindow(idWindow);
         // очистка буфера цвета и глубины
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -33,24 +31,22 @@ namespace robbiespace
                   0.0f, 0.0f, 0.0f,
                   0.0f, 1.0f, 0.0f);
 
-        glPushMatrix();        
+        glPushMatrix();
         worldScena->Floor();
         glPopMatrix();
         // Переключение буферов
         glutSwapBuffers();
-        //*/
     }
 
     //Функция изменения размеров окна
     void WinMain::ReshapeFunc(int width, int height)
-    {
-        // предупредим деление на ноль
-        // если окно сильно перетянуто будет
-        if (height == 0)
-            height = 1;
+    {        
+        // Если окно окажется сильно сжато
+        if (width == 0) width = 1;
+        if (height == 0) height = 1;
 
-        //screenWidth = width;   // Ширина окна
-        //screenHeight = height; // Высота окна
+        iWindowSizeWidth = width;   // Ширина окна
+        iWindowSizeHeight = height; // Высота окна
 
         float ratio = width * 1.0 / height;
 
@@ -66,6 +62,22 @@ namespace robbiespace
         glMatrixMode(GL_MODELVIEW);
     }
 
+    // Функция для обработки данных с клавиатуры, возникает при нажатии клавиши
+    // код клавиши
+    // x - координата мыши по оси X
+    // y - координата мыши по оси Y
+    void WinMain::KeyboardFunc(unsigned char key, int x, int y)
+    {
+        keyHandler.FunctionKeyboard(key, x, y);
+    }
+
+    // Основной таймер
+    void WinMain::MainTimer(int value)
+    {
+        if (keyHandler.IsKeyPress(eKeys::Exit))
+            CloseWindow();
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////
     // Функции переходники
     /////////////////////////////////////////////////////////////////////////////////////
@@ -79,6 +91,19 @@ namespace robbiespace
     void ReshapeFuncForWinMain(int width, int height)
     {
         winMainPoint->ReshapeFunc(width, height);
+    }
+
+    // Функция переходник для вызова нестатического метода класса при нажатии клавиши
+    void KeyboardFuncForWinMain(unsigned char key, int x, int y)
+    {
+        winMainPoint->KeyboardFunc(key, x, y);
+    }
+
+    // Функция переходник для вызова нестатического метода класса при нажатии клавиши
+    void MainTimerForWinMain(int value)
+    {
+        winMainPoint->MainTimer(value);
+        glutTimerFunc(40, MainTimerForWinMain, 0);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -100,9 +125,11 @@ namespace robbiespace
         glutInitWindowPosition(iWindowPositionX, iWindowPositionY);
         idWindow = glutCreateWindow(sNameWindow.c_str());
 
-        glutDisplayFunc(DisplayFuncForWinMain); // Установка функции для рисования
-        glutReshapeFunc(ReshapeFuncForWinMain); // Установка функции в случае изменения размеров окна
-        //*/
+        glutDisplayFunc(DisplayFuncForWinMain);   // Установка функции для рисования
+        glutReshapeFunc(ReshapeFuncForWinMain);   // Установка функции в случае изменения размеров окна
+        glutKeyboardFunc(KeyboardFuncForWinMain); // Установка функции для обработки данных с клавиатуры
+
+        glutTimerFunc(40, MainTimerForWinMain, 0);
     }
 
 } // namespace robbiespace

@@ -37,6 +37,7 @@ namespace robbiespace
         // posY - Позиция окна по OY
         WinBase(string name, string m, int width, int height, int posX, int posY);
         ~WinBase();
+        void CloseWindow(); // Закрыть окно
     };
 
 } // namespace robbiespace
