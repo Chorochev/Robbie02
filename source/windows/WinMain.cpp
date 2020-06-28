@@ -2,6 +2,7 @@
 #include <GL/freeglut.h>
 #include <windows/WinMain.h>
 #include <geometry/World.h>
+#include <system/PrintTextHelper.h>
 
 namespace robbiespace
 {
@@ -16,6 +17,12 @@ namespace robbiespace
 
     WinMain::~WinMain()
     {
+    }
+
+    // Сообщение для консоли
+    string WinMain::GetMessageForConsole()
+    {
+        return "Screen[" + std::to_string(iWindowSizeWidth) + ":" + std::to_string(iWindowSizeHeight) + "]";
     }
 
     // Функция рисования
@@ -34,16 +41,22 @@ namespace robbiespace
         glPushMatrix();
         worldScena->Floor();
         glPopMatrix();
+
+        glPushMatrix();
+        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 1, GetMessageForConsole());
+        glPopMatrix();
         // Переключение буферов
         glutSwapBuffers();
     }
 
     //Функция изменения размеров окна
     void WinMain::ReshapeFunc(int width, int height)
-    {        
+    {
         // Если окно окажется сильно сжато
-        if (width == 0) width = 1;
-        if (height == 0) height = 1;
+        if (width == 0)
+            width = 1;
+        if (height == 0)
+            height = 1;
 
         iWindowSizeWidth = width;   // Ширина окна
         iWindowSizeHeight = height; // Высота окна

@@ -2,6 +2,8 @@
 #ifndef PROJECT_WINDOWS_WINMAIN_H
 #define PROJECT_WINDOWS_WINMAIN_H
 
+#include <string>
+
 #include <windows/WinBase.h>
 #include <geometry/World.h>
 #include <events/KeyHandler.h>
@@ -37,6 +39,9 @@ namespace robbiespace
 
         // Основной таймер
         void MainTimer(int value);
+
+        // Сообщение для консоли
+        string GetMessageForConsole();
     };
 
 } // namespace robbiespace
