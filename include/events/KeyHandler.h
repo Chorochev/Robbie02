@@ -2,7 +2,7 @@
 #ifndef PROJECT_EVENTS_KEYHANDLER_H
 #define PROJECT_EVENTS_KEYHANDLER_H
 
-#define SIZE_STRUCTKEY_ARRAY 1
+#define SIZE_STRUCTKEY_ARRAY 2
 
 #include <string>
 
@@ -19,7 +19,8 @@ namespace robbiespace
     struct StructKey
     {
         std::string Name; // Имя клавиши
-        char Code;        // Код клавиши
+        std::string Code; // Код клавиши
+        char Value;       // Значение клавиши
         eKeys TypeKey;    // Тип клавиши
         bool IsPress;     // Признак нажатия клавиши
     };

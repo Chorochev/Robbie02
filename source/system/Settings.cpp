@@ -123,7 +123,7 @@ namespace robbiespace
         while (itChar != _listChar.end())
         {
             string name = itChar->first;
-            char value = itChar->second;
+            int value = (int)itChar->second;
             out << name << " " << value << std::endl;
             itChar++;
         }
@@ -169,8 +169,7 @@ namespace robbiespace
         in.precision(16);
         string nameValue;
         char firstChar;
-        int intValue;
-        char charValue;
+        int intValue;       
         float floatValue;
         double doubleValue;
         string stringValue;
@@ -189,8 +188,8 @@ namespace robbiespace
                     GetSettingOrDefault(nameValue, (int)intValue);
                     break;
                 case 'c':
-                    in >> charValue;
-                    GetSettingOrDefault(nameValue, (char)charValue);
+                    in >> intValue; 
+                    GetSettingOrDefault(nameValue, (char)intValue);
                     break;
                 case 'f':
                     in >> floatValue;

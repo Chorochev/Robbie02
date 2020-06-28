@@ -12,17 +12,17 @@ namespace robbiespace
     // Установка клавиш по умолчанию
     void KeyHandler::SetDefaultKeys()
     {
-        // Exit
-        keys[0].Name = "cKeyExit1";
-        keys[0].Code = '\x1B';
-        keys[0].TypeKey = eKeys::Exit;
-        keys[0].IsPress = false;
+        keys[0] = {"cKeyExit1", "ESC", '\x1B', eKeys::Exit, false};
+        keys[1] = {"cKeyExit2", "ESC", 'q', eKeys::Exit, false};
     }
 
     // Загрузка значений клавиш из файла конфигурации
     void KeyHandler::LoadKeyValues()
     {
-        keys[0].Code = globalSettings.GetSettingOrDefault(keys[0].Name, '\x1B'); // Exit
+        for (size_t i = 0; i < sizeKeys; i++)
+        {
+            keys[i].Value = globalSettings.GetSettingOrDefault(keys[i].Name, keys[i].Value);
+        }
     }
 
     // Сохранение значений в файл конфигурации
@@ -30,7 +30,7 @@ namespace robbiespace
     {
         for (size_t i = 0; i < sizeKeys; i++)
         {
-            globalSettings.SetValue(keys[i].Name, keys[i].Code);
+            globalSettings.SetValue(keys[i].Name, keys[i].Value);
         }
     }
 
@@ -42,7 +42,7 @@ namespace robbiespace
     {
         for (size_t i = 0; i < sizeKeys; i++)
         {
-            if (keys[i].Code == key)
+            if (keys[i].Value == key)
             {
                 keys[i].IsPress = true;
             }
