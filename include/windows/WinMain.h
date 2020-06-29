@@ -31,11 +31,12 @@ namespace robbiespace
         // height - Новый размер окна по высоте
         void ReshapeFunc(int width, int height);
 
-        // Функция для обработки данных с клавиатуры, возникает при нажатии клавиши
+        // Функция для обработки нажатия клавиш клавиатуры
         // код клавиши
         // x - координата мыши по оси X
         // y - координата мыши по оси Y
-        void KeyboardFunc(unsigned char key, int x, int y); // Установка функции для обработки данных с клавиатуры
+        // isPress - признак нажатия клавиши
+        void KeyboardFunc(unsigned char key, int x, int y, bool isPress);
 
         // Основной таймер
         void MainTimer(int value);
