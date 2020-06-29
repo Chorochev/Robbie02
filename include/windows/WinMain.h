@@ -14,12 +14,14 @@ namespace robbiespace
     {
 
     private:
-        World *worldScena;     // Указатель на класс для сцены
-        KeyHandler keyHandler; // Обработка клавиш
+        World *worldScena; // Указатель на класс для сцены
 
     public:
         WinMain();
         ~WinMain();
+
+        KeyHandler keyHandler; // Обработка клавиш
+
         // Создание окна
         void Create(World *world);
 
@@ -30,13 +32,6 @@ namespace robbiespace
         // width - Новый размер окна по ширине
         // height - Новый размер окна по высоте
         void ReshapeFunc(int width, int height);
-
-        // Функция для обработки нажатия клавиш клавиатуры
-        // код клавиши
-        // x - координата мыши по оси X
-        // y - координата мыши по оси Y
-        // isPress - признак нажатия клавиши
-        void KeyboardFunc(unsigned char key, int x, int y, bool isPress);
 
         // Основной таймер
         void MainTimer(int value);

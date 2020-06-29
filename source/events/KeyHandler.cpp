@@ -1,3 +1,5 @@
+#include <GL/freeglut.h>
+
 #include <system/Settings.h>
 #include <events/KeyHandler.h>
 
@@ -12,13 +14,17 @@ namespace robbiespace
     // Установка клавиш по умолчанию
     void KeyHandler::SetDefaultKeys()
     {
-        keys[0] = {"cKeyExit1", "ESC", '\x1B', eKeys::Exit, false};
-        keys[1] = {"cKeyExit2", "ESC", 'q', eKeys::Exit, false};
+        keys[0] = {"iKeyExit1", "ESC", '\x1B', eKeys::Exit, eDeviceKey::Keyboard, false, 0, 0};
+        keys[1] = {"iKeyExit2", "ESC", 'q', eKeys::Exit, eDeviceKey::Keyboard, false, 0, 0};
+        keys[2] = {"iKeyLEFT", "LEFT", GLUT_KEY_LEFT, eKeys::KEY_LEFT, eDeviceKey::KeyboardSpec, false, 0, 0};
+        keys[3] = {"iKeyUP", "UP", GLUT_KEY_UP, eKeys::KEY_UP, eDeviceKey::KeyboardSpec, false, 0, 0};
+        keys[4] = {"iKeyRIGHT", "RIGHT", GLUT_KEY_RIGHT, eKeys::KEY_RIGHT, eDeviceKey::KeyboardSpec, false, 0, 0};
+        keys[5] = {"iKeyDOWN", "DOWN", GLUT_KEY_DOWN, eKeys::KEY_DOWN, eDeviceKey::KeyboardSpec, false, 0, 0};
 
         // Неопознанные клавиши
-        unknownKeys[0] = {"cKeyUnknown1", "Unknown1", 0, eKeys::Unknown, false};
-        unknownKeys[1] = {"cKeyUnknown2", "Unknown2", 0, eKeys::Unknown, false};
-        unknownKeys[2] = {"cKeyUnknown3", "Unknown3", 0, eKeys::Unknown, false};
+        unknownKeys[0] = {"iKeyUnknown1", "Unknown1", 0, eKeys::Unknown, eDeviceKey::Unknown, false, 0, 0};
+        unknownKeys[1] = {"iKeyUnknown2", "Unknown2", 0, eKeys::Unknown, eDeviceKey::Unknown, false, 0, 0};
+        unknownKeys[2] = {"iKeyUnknown3", "Unknown3", 0, eKeys::Unknown, eDeviceKey::Unknown, false, 0, 0};
     }
 
     // Загрузка значений клавиш из файла конфигурации
@@ -45,49 +51,69 @@ namespace robbiespace
         }
     }
 
-    // Функция для обработки нажатия клавиш клавиатуры
-    // код клавиши
+    // Функция для обработки клавиш клавиатуры
+    // key - код клавиши
     // x - координата мыши по оси X
     // y - координата мыши по оси Y
-    // IsPress - признак нажатия клавиши
-    void KeyHandler::FunctionKeyboard(unsigned char key, int x, int y, bool isPress)
+    // isPress - признак нажатия клавиши
+    // TypeDevice - Тип устройства
+    void KeyHandler::FunctionKeyboard(int key, int x, int y, bool isPress, eDeviceKey typeDevice)
     {
         bool isUnknown = true; // Флаг определяет нажатие знакомой клавиши
         for (size_t i = 0; i < sizeKeys; i++)
         {
-            if (keys[i].Value == key)
+            if (keys[i].TypeDevice == typeDevice && keys[i].Value == key)
             {
                 keys[i].IsPress = isPress;
+                keys[i].MouseX = x;
+                keys[i].MouseY = y;
                 isUnknown = false;
             }
         }
 
         if (isUnknown)
         {
-            for (size_t i = 0; i < sizeUnknownKeys; i++)
-            {
-                if (isPress && unknownKeys[i].IsPress && unknownKeys[i].Value == key)
-                    return;
-            }
+            KeyUnknown(key, x, y, isPress, typeDevice);
+        }
+    }
 
-            for (size_t i = 0; i < sizeUnknownKeys; i++)
+    // Функция для обработки неизвестной клавиши
+    // key - код клавиши
+    // x - координата мыши по оси X
+    // y - координата мыши по оси Y
+    // isPress - признак нажатия клавиши
+    // deviceKey - Тип устройства
+    void KeyHandler::KeyUnknown(int key, int x, int y, bool isPress, eDeviceKey deviceKey)
+    {
+        for (size_t i = 0; i < sizeUnknownKeys; i++)
+        {
+            if (isPress && unknownKeys[i].IsPress && unknownKeys[i].Value == key && unknownKeys[i].TypeDevice == deviceKey)
+                return;
+        }
+
+        for (size_t i = 0; i < sizeUnknownKeys; i++)
+        {
+            if (isPress)
             {
-                if (isPress)
+                if (unknownKeys[i].IsPress == false)
                 {
-                    if (unknownKeys[i].IsPress == false)
-                    {
-                        unknownKeys[i].Value = key;
-                        unknownKeys[i].IsPress = true;
-                        return;
-                    }
+                    unknownKeys[i].Value = key;
+                    unknownKeys[i].IsPress = true;
+                    unknownKeys[i].MouseX = x;
+                    unknownKeys[i].MouseY = y;
+                    unknownKeys[i].TypeDevice = deviceKey;
+                    return;
                 }
-                else
+            }
+            else
+            {
+                if (unknownKeys[i].IsPress && unknownKeys[i].Value == key)
                 {
-                    if (unknownKeys[i].IsPress && unknownKeys[i].Value == key)
-                    {
-                        unknownKeys[i].Value = 0;
-                        unknownKeys[i].IsPress = false;
-                    }
+                    unknownKeys[i].Value = 0;
+                    unknownKeys[i].IsPress = false;
+                    unknownKeys[i].MouseX = 0;
+                    unknownKeys[i].MouseY = 0;
+                    unknownKeys[i].TypeDevice = deviceKey;
                 }
             }
         }
@@ -119,7 +145,7 @@ namespace robbiespace
                 else
                     resultStr += ", ";
 
-                resultStr += "[" + keys[i].Code + "=" + GetStringStructKey(unknownKeys[i]) + "]";
+                resultStr += "[" + keys[i].Code + "=" + GetStringStructKey(keys[i]) + "]";
             }
         }
         if (isFirst == false)
@@ -152,9 +178,9 @@ namespace robbiespace
     string KeyHandler::GetStringStructKey(StructKey rKey)
     {
         string result = "(";
-        result += std::to_string(((int)rKey.Value));
+        result += std::to_string(rKey.Value);
 
-        if (rKey.Value < 128)
+        if (rKey.Value < 128 && rKey.TypeDevice == eDeviceKey::Keyboard)
         {
             char ch = rKey.Value;
             if ((ch >= '0' && ch <= '9') || (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))

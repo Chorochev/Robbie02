@@ -76,15 +76,6 @@ namespace robbiespace
         glMatrixMode(GL_MODELVIEW);
     }
 
-    // Функция для обработки данных с клавиатуры, возникает при нажатии клавиши
-    // код клавиши
-    // x - координата мыши по оси X
-    // y - координата мыши по оси Y
-    void WinMain::KeyboardFunc(unsigned char key, int x, int y, bool isPress)
-    {
-        keyHandler.FunctionKeyboard(key, x, y, isPress);
-    }
-
     // Основной таймер
     void WinMain::MainTimer(int value)
     {
@@ -112,16 +103,28 @@ namespace robbiespace
     // Установка функции для обработки нажатия клавиши клавиатуры
     void KeyboardFuncForWinMain(unsigned char key, int x, int y)
     {
-        winMainPoint->KeyboardFunc(key, x, y, true);
+        winMainPoint->keyHandler.FunctionKeyboard(key, x, y, true, eDeviceKey::Keyboard);
     }
 
     // Установка функции для обработки отжатия клавиши клавиатуры
     void KeyboardUpFuncForWinMain(unsigned char key, int x, int y)
     {
-        winMainPoint->KeyboardFunc(key, x, y, false);
+        winMainPoint->keyHandler.FunctionKeyboard(key, x, y, false, eDeviceKey::Keyboard);
     }
 
-    // Функция переходник для вызова нестатического метода "таймер" из класса 
+    // Установка функции для обработки нажатия специальных клавиши клавиатуры
+    void KeyboardSpecialFuncForWinMain(int key, int x, int y)
+    {
+        winMainPoint->keyHandler.FunctionKeyboard(key, x, y, true, eDeviceKey::KeyboardSpec);
+    }
+
+    // Установка функции для обработки отжатия специальных клавиши клавиатуры
+    void KeyboardSpecialUpFuncForWinMain(int key, int x, int y)
+    {
+        winMainPoint->keyHandler.FunctionKeyboard(key, x, y, false, eDeviceKey::KeyboardSpec);
+    }
+
+    // Функция переходник для вызова нестатического метода "таймер" из класса
     void MainTimerForWinMain(int value)
     {
         winMainPoint->MainTimer(value);
@@ -147,10 +150,12 @@ namespace robbiespace
         glutInitWindowPosition(iWindowPositionX, iWindowPositionY);
         idWindow = glutCreateWindow(sNameWindow.c_str());
 
-        glutDisplayFunc(DisplayFuncForWinMain);   // Установка функции для рисования
-        glutReshapeFunc(ReshapeFuncForWinMain);   // Установка функции в случае изменения размеров окна
-        glutKeyboardFunc(KeyboardFuncForWinMain); // Установка функции для обработки нажатия клавиши клавиатуры
-        glutKeyboardUpFunc(KeyboardUpFuncForWinMain); // Установка функции для обработки отжатия клавиши клавиатуры
+        glutDisplayFunc(DisplayFuncForWinMain);             // Установка функции для рисования
+        glutReshapeFunc(ReshapeFuncForWinMain);             // Установка функции в случае изменения размеров окна
+        glutKeyboardFunc(KeyboardFuncForWinMain);           // Установка функции для обработки нажатия клавиши клавиатуры
+        glutKeyboardUpFunc(KeyboardUpFuncForWinMain);       // Установка функции для обработки отжатия клавиши клавиатуры
+        glutSpecialFunc(KeyboardSpecialFuncForWinMain);     // Установка функции для обработки нажатия специальных клавиши клавиатуры
+        glutSpecialUpFunc(KeyboardSpecialUpFuncForWinMain); // Установка функции для обработки отжатия специальных клавиши клавиатуры
 
         glutTimerFunc(40, MainTimerForWinMain, 0);
     }
