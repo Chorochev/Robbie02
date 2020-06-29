@@ -7,28 +7,10 @@
 
 #include <string>
 
+#include <system/Enums.h>
+
 namespace robbiespace
-{
-    // Типы клавиш
-    enum class eKeys
-    {
-        Unknown,   // нет нажатых клавиш
-        Exit,      // кнопка выхода
-        KEY_LEFT,  // Стрелка влево
-        KEY_UP,    // Стрелка вверх
-        KEY_RIGHT, // Стрелка вправо
-        KEY_DOWN   // Стрелка вниз
-    };
-
-    // Типы устройств
-    enum class eDeviceKey
-    {
-        Unknown,      // Неопознанно
-        Keyboard,     // Клавиатура
-        KeyboardSpec, // Клавиатура (специальные клавиши)
-        Mouse         // Мышка
-    };
-
+{   
     // Структура для клавиши
     struct StructKey
     {

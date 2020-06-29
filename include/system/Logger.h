@@ -5,19 +5,12 @@
 #include <map>
 #include <string>
 
+#include <system/Enums.h>
+
 using namespace std;
 
 namespace robbiespace
-{
-    // Типы сообщений лога
-    enum class LoggerType
-    {
-        LT_UNKNOWN,
-        LT_INFO,
-        LT_WARNING,
-        LT_ERRORS,
-    };
-
+{  
     class Logger
     {
     private:
