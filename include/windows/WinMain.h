@@ -6,6 +6,7 @@
 
 #include <windows/WinBase.h>
 #include <geometry/World.h>
+#include <geometry/Camera.h>
 #include <events/KeyHandler.h>
 
 namespace robbiespace
@@ -20,6 +21,7 @@ namespace robbiespace
         WinMain();
         ~WinMain();
 
+        Camera camera; // камера вида
         KeyHandler keyHandler; // Обработка клавиш
 
         // Создание окна
