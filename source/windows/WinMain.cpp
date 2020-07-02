@@ -78,12 +78,12 @@ namespace robbiespace
     // Основной таймер
     void WinMain::MainTimer(int value)
     {
+        glutSetWindow(idWindow);    
+        camera.HandlerKeyPressed(&keyHandler);        
+        glutPostRedisplay();
+
         if (keyHandler.IsKeyPress(eKeys::Exit))
             CloseWindow();
-
-        camera.HandlerKeyPressed(&keyHandler);
-
-        glutPostRedisplay();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
