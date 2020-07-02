@@ -18,6 +18,9 @@ namespace robbiespace
         // rows - количество строк
         // columns - количество столбцов
         void FloorCells(int rows, int columns);
+
+        // Стены
+        void Walls();
     };
 
 } // namespace robbiespace

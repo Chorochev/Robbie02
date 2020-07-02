@@ -38,12 +38,13 @@ namespace robbiespace
         glPushMatrix();
         //worldScena->Floor();
         worldScena->FloorCells(8, 8);
+        worldScena->Walls();
         glPopMatrix();
 
         glPushMatrix();
         globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 1, GetMessageForConsole());
-        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 2, keyHandler.GetMessageForConsole());
-        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 3, camera.GetMessageForConsole());
+        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 2, camera.GetMessageForConsole());        
+        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 3, keyHandler.GetMessageForConsole());        
         glPopMatrix();
         // Переключение буферов
         glutSwapBuffers();
