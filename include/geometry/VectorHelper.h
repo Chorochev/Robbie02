@@ -22,11 +22,11 @@ namespace robbiespace
 
         // Получение косинуса угла
         // angle - угол 0 - 360 град.
-        double GetCos(double angle) { return cos(angle * (PI / 180.0)); };
+        inline double GetCos(double angle) { return cos(angle * (PI / 180.0)); };
 
         // Получение синуса угла
         // angle - угол 0 - 360 град.
-        double GetSin(double angle) { return sin(angle * (PI / 180.0)); }
+        inline double GetSin(double angle) { return sin(angle * (PI / 180.0)); }
     };
 
     extern VectorHelper globalVectorHelper;

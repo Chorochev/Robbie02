@@ -10,7 +10,14 @@ namespace robbiespace
         /* data */
     public:
         World();
-        void Floor(); // Пол
+
+        // Пол
+        void Floor();
+
+        // Пол в клеточку
+        // rows - количество строк
+        // columns - количество столбцов
+        void FloorCells(int rows, int columns);
     };
 
 } // namespace robbiespace

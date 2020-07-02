@@ -33,5 +33,5 @@ namespace robbiespace
         Mouse         // Мышка
     };
 
-}
+} // namespace robbiespace
 #endif

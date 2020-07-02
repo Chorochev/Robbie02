@@ -33,13 +33,11 @@ namespace robbiespace
         // обнуление трансформации
         glLoadIdentity();
         // установка камеры
-        // gluLookAt(0.0f, 0.5f, -1.0f,
-        //           0.0f, 0.0f, 0.0f,
-        //           0.0f, 1.0f, 0.0f);
         camera.LookAt();
 
         glPushMatrix();
-        worldScena->Floor();
+        //worldScena->Floor();
+        worldScena->FloorCells(8, 8);
         glPopMatrix();
 
         glPushMatrix();
@@ -83,25 +81,7 @@ namespace robbiespace
         if (keyHandler.IsKeyPress(eKeys::Exit))
             CloseWindow();
 
-        if (keyHandler.IsKeyPress(eKeys::KEY_UP))
-        {
-            camera.Move(speedMoveCamera);
-        }
-
-        if (keyHandler.IsKeyPress(eKeys::KEY_DOWN))
-        {
-            camera.Move(-speedMoveCamera);
-        }
-
-        if (keyHandler.IsKeyPress(eKeys::KEY_LEFT))
-        {
-            camera.TurnY(-shiftAngelCamera);
-        }
-
-        if (keyHandler.IsKeyPress(eKeys::KEY_RIGHT))
-        {
-            camera.TurnY(shiftAngelCamera);
-        }
+        camera.HandlerKeyPressed(&keyHandler);
 
         glutPostRedisplay();
     }

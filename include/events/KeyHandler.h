@@ -6,11 +6,10 @@
 #define SIZE_UNKNOWN_STRUCTKEY_ARRAY 3
 
 #include <string>
-
 #include <system/Enums.h>
 
 namespace robbiespace
-{   
+{
     // Структура для клавиши
     struct StructKey
     {
@@ -41,7 +40,7 @@ namespace robbiespace
 
         // Создание строки из структуры для консоли
         // rKey - структура клавиши
-        string GetStringStructKey(StructKey rKey);
+        std::string GetStringStructKey(StructKey rKey);
 
     public:
         KeyHandler();
@@ -66,7 +65,7 @@ namespace robbiespace
         bool IsKeyPress(eKeys key);
 
         // Сообщение для консоли
-        string GetMessageForConsole();
+        std::string GetMessageForConsole();
     };
 
 } // namespace robbiespace

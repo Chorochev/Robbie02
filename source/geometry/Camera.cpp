@@ -6,7 +6,10 @@
 namespace robbiespace
 {
 
-    Camera::Camera()
+    // Инициализация камеры
+    // speed_move - Скорость движения камеры
+    // shift_angel - Угол поворота камеры
+    Camera::Camera(float speed_move, double shift_angel)
     {
         // Текущее положение камеры
         currentEye.Y = 0.25f;
@@ -19,6 +22,9 @@ namespace robbiespace
         rotVector.Z = sizeVector;
         // Текущий угол камеры (0-360 гр.)
         currentAngel = 0.0;
+
+        speedMove = speed_move;
+        shiftAngel = shift_angel;
     }
 
     // установка камеры
@@ -68,6 +74,31 @@ namespace robbiespace
         RobVector newVec = globalVectorHelper.RotateY(normVec, shiftAngel);
         // Возвращаем новый вектор на место
         currentCenter = currentEye + newVec;
+    }
+
+    // Обработка клавиш
+    // keyHandler - указатель на обработчик клавиш
+    void Camera::HandlerKeyPressed(KeyHandler *keyHandler)
+    {
+        if (keyHandler->IsKeyPress(eKeys::KEY_UP))
+        {
+            Move(speedMove);
+        }
+
+        if (keyHandler->IsKeyPress(eKeys::KEY_DOWN))
+        {
+            Move(-speedMove);
+        }
+
+        if (keyHandler->IsKeyPress(eKeys::KEY_LEFT))
+        {
+            TurnY(-shiftAngel);
+        }
+
+        if (keyHandler->IsKeyPress(eKeys::KEY_RIGHT))
+        {
+            TurnY(shiftAngel);
+        }
     }
 
     // Сообщение для консоли

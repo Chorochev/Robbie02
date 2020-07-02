@@ -21,11 +21,8 @@ namespace robbiespace
         WinMain();
         ~WinMain();
 
-        const float speedMoveCamera = 0.05f; // Скорость движения камеры
-        const double shiftAngelCamera = 1.5; // Угол поворота камеры
-
-        Camera camera;         // камера вида
-        KeyHandler keyHandler; // Обработка клавиш
+        Camera camera = Camera(0.05f, 1.5); // камера вида
+        KeyHandler keyHandler;              // Обработка клавиш
 
         // Создание окна
         void Create(World *world);
