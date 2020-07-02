@@ -21,7 +21,10 @@ namespace robbiespace
         WinMain();
         ~WinMain();
 
-        Camera camera; // камера вида
+        const float speedMoveCamera = 0.05f; // Скорость движения камеры
+        const double shiftAngelCamera = 1.5; // Угол поворота камеры
+
+        Camera camera;         // камера вида
         KeyHandler keyHandler; // Обработка клавиш
 
         // Создание окна

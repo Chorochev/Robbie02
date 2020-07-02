@@ -1,50 +1,83 @@
 #include <GL/glut.h>
+#include <math.h>
 #include <geometry/Camera.h>
+#include <geometry/VectorHelper.h>
 
 namespace robbiespace
 {
+
     Camera::Camera()
     {
-        eyeX = 0.0f;    // Положение камеры по OX
-        eyeY = 0.5f;    // Положение камеры по OY
-        eyeZ = -1.0f;   // Положение камеры по OZ
-        centerX = 0.0f; // Точка зрения (куда камера смотрит) по OX
-        centerY = 0.0f; // Точка зрения (куда камера смотрит) по OY
-        centerZ = 0.0f; // Точка зрения (куда камера смотрит) по OZ
-        upX = 0.0f;     // Угол поворота камеры по OX
-        upY = 1.0f;     // Угол поворота камеры по OY
-        upZ = 0.0f;     // Угол поворота камеры по OZ
-
-        speed = 0.01f; // Скорость смещения камеры
+        // Текущее положение камеры
+        currentEye.Y = 0.25f;
+        // Текущая точка зрения камеры (куда камера смотрит)
+        currentCenter.Y = 0.25f;
+        currentCenter.Z = sizeVector;
+        // Текущий угол поворота камеры
+        currentUp.Y = 1.0f;
+        // Нормализованный вектор вращения
+        rotVector.Z = sizeVector;
+        // Текущий угол камеры (0-360 гр.)
+        currentAngel = 0.0;
     }
 
     // установка камеры
     void Camera::LookAt()
     {
         // установка камеры
-        gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
+        gluLookAt(currentEye.X, currentEye.Y, currentEye.Z, currentCenter.X, currentCenter.Y, currentCenter.Z, currentUp.X, currentUp.Y, currentUp.Z);
     }
 
-    // Сдвинуть камеру вперед
-    void Camera::Forward()
+    // Увеличиваем текущий угол камеры
+    // addAngel - добавочный угол
+    void Camera::IncCurrentAngel(double addAngel)
     {
-        // eyeX - Положение камеры по OX
-        // eyeY - Положение камеры по OY
-        eyeZ += speed; // Положение камеры по OZ
-        // centerX - Точка зрения (куда камера смотрит) по OX
-        // centerY - Точка зрения (куда камера смотрит) по OY
-        centerZ += speed; // Точка зрения (куда камера смотрит) по OZ
+        double newAngel = currentAngel + addAngel;
+        if (newAngel >= 0.0 && newAngel <= 360.0)
+            currentAngel = newAngel;
+        if (newAngel >= 360.0)
+            currentAngel = newAngel - 360.0;
+        if (newAngel < 0.0)
+            currentAngel = 360.0 - newAngel;
     }
 
-    // Сдвинуть камеру вперед
-    void Camera::Back()
+    // Сдвинуть камеру вперед или назад
+    // step - переместить камеру
+    void Camera::Move(float step)
     {
-        // eyeX - Положение камеры по OX
-        // eyeY - Положение камеры по OY
-        eyeZ -= speed; // Положение камеры по OZ
-        // centerX - Точка зрения (куда камера смотрит) по OX
-        // centerY - Точка зрения (куда камера смотрит) по OY
-        centerZ -= speed; // Точка зрения (куда камера смотрит) по OZ
+        // Нормализуем вектор
+        RobVector normVec = currentCenter - currentEye;
+        // Удлиняем нормализованный вектор
+        RobVector addVec = normVec * (1.0 + step);
+        // Находим вектор сдвига
+        RobVector shiftVec = addVec - normVec;
+        // Сдвигаем вектора положения камеры и направление вида на вектор сдвига
+        currentEye = currentEye + shiftVec;
+        currentCenter = currentCenter + shiftVec;
+    }
+
+    // Повернуть камеру вокруг оси Y
+    // shiftAngel - угол на который нужно повернуть
+    void Camera::TurnY(double shiftAngel)
+    {
+        // Смещаем текущий угол - только для консоли
+        IncCurrentAngel(shiftAngel);
+        // Нормализуем вектор
+        RobVector normVec = currentCenter - currentEye;
+        // Поворачиваем нормализованный вектор на заданный угол
+        RobVector newVec = globalVectorHelper.RotateY(normVec, shiftAngel);
+        // Возвращаем новый вектор на место
+        currentCenter = currentEye + newVec;
+    }
+
+    // Сообщение для консоли
+    string Camera::GetMessageForConsole()
+    {
+        string resultStr = "Camera: ";
+        resultStr += "angel = " + std::to_string(currentAngel) + " ";
+        resultStr += "eye[" + std::to_string(currentEye.X) + ";" + std::to_string(currentEye.Y) + ";" + std::to_string(currentEye.Z) + "] ";
+        resultStr += "center[" + std::to_string(currentCenter.X) + ";" + std::to_string(currentCenter.Y) + ";" + std::to_string(currentCenter.Z) + "] ";
+        return resultStr;
     }
 
 } // namespace robbiespace

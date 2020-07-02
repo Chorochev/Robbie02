@@ -1,7 +1,6 @@
 #include <GL/glut.h>
 #include <GL/freeglut.h>
 #include <windows/WinMain.h>
-#include <geometry/World.h>
 #include <system/PrintTextHelper.h>
 
 namespace robbiespace
@@ -46,6 +45,7 @@ namespace robbiespace
         glPushMatrix();
         globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 1, GetMessageForConsole());
         globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 2, keyHandler.GetMessageForConsole());
+        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 3, camera.GetMessageForConsole());
         glPopMatrix();
         // Переключение буферов
         glutSwapBuffers();
@@ -85,12 +85,22 @@ namespace robbiespace
 
         if (keyHandler.IsKeyPress(eKeys::KEY_UP))
         {
-            camera.Forward();
+            camera.Move(speedMoveCamera);
         }
 
         if (keyHandler.IsKeyPress(eKeys::KEY_DOWN))
         {
-            camera.Back();
+            camera.Move(-speedMoveCamera);
+        }
+
+        if (keyHandler.IsKeyPress(eKeys::KEY_LEFT))
+        {
+            camera.TurnY(-shiftAngelCamera);
+        }
+
+        if (keyHandler.IsKeyPress(eKeys::KEY_RIGHT))
+        {
+            camera.TurnY(shiftAngelCamera);
         }
 
         glutPostRedisplay();

@@ -2,33 +2,46 @@
 #ifndef PROJECT_GEOMETRY_CAMERA_H
 #define PROJECT_GEOMETRY_CAMERA_H
 
+#include <string>
+#include <geometry/RobVector.h>
+
+using namespace std;
+
 namespace robbiespace
 {
     class Camera
     {
     private:
-        float eyeX;    // Положение камеры по OX
-        float eyeY;    // Положение камеры по OY
-        float eyeZ;    // Положение камеры по OZ
-        float centerX; // Точка зрения (куда камера смотрит) по OX
-        float centerY; // Точка зрения (куда камера смотрит) по OY
-        float centerZ; // Точка зрения (куда камера смотрит) по OZ
-        float upX;     // Угол поворота камеры по OX
-        float upY;     // Угол поворота камеры по OY
-        float upZ;     // Угол поворота камеры по OZ
+        RobVector currentEye;    // Текущее положение камеры
+        RobVector currentCenter; // Текущая точка зрения камеры (куда камера смотрит)
+        RobVector currentUp;     // Текущий угол поворота камеры
 
-        float speed; // Скорость смещения камеры
+        const float sizeVector = 1.0f; // размер нормализованного вектора
+        RobVector rotVector;           // Нормализованный вектор вращения
+        double currentAngel;           // Текущий угол камеры (0-360 гр.) - Только для консоли
+
+        // Увеличиваем текущий угол камеры
+        // addAngel - добавочный угол
+        void IncCurrentAngel(double addAngel);
+
     public:
         Camera();
+
         // установка камеры
         void LookAt();
 
-        // Сдвинуть камеру вперед
-        void Forward();
+        // Сдвинуть камеру вперед или назад
+        // step - переместить камеру
+        void Move(float step);
 
-        // Сдвинуть камеру вперед
-        void Back();
+        // Повернуть камеру вокруг оси Y
+        // shiftAngel - угол на который нужно повернуть
+        void TurnY(double shiftAngel);
+
+        // Сообщение для консоли
+        string GetMessageForConsole();
     };
 
 } // namespace robbiespace
+
 #endif
