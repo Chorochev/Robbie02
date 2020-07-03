@@ -7,6 +7,7 @@
 #include <windows/WinBase.h>
 #include <geometry/World.h>
 #include <geometry/CameraCustom.h>
+#include <geometry/CameraGlut.h>
 #include <events/KeyHandler.h>
 
 namespace robbiespace
@@ -22,8 +23,9 @@ namespace robbiespace
         ~WinMain();
 
         CameraCustom cameraCustom = CameraCustom(0.05f, 1.5); // камера вида
-        CameraBase *camera;                   // Камера вида
-        KeyHandler keyHandler;                // Обработка клавиш
+        CameraGlut cameraGlut = CameraGlut(0.05f, 1.5);       // камера вида
+        CameraBase *camera;                                   // Камера вида
+        KeyHandler keyHandler;                                // Обработка клавиш
 
         // Создание окна
         void Create(World *world);

@@ -25,29 +25,24 @@ namespace robbiespace
         speedMove = speed_move;
         shiftAngel = shift_angel;
     }
-  
-    // Обработка клавиш
-    // keyHandler - указатель на обработчик клавиш
-    void CameraBase::HandlerKeyPressed(KeyHandler *keyHandler)
+
+    // Увеличиваем текущий угол камеры
+    // addAngel - добавочный угол
+    void CameraBase::IncCurrentAngel(double addAngel)
     {
-        if (keyHandler->IsKeyPress(eKeys::KEY_UP))
-        {
-            Move(speedMove);
-        }
+        double newAngel = currentAngel + addAngel;
 
-        if (keyHandler->IsKeyPress(eKeys::KEY_DOWN))
+        if (newAngel >= 360.0)
         {
-            Move(-speedMove);
+            currentAngel = newAngel - 360.0;
         }
-
-        if (keyHandler->IsKeyPress(eKeys::KEY_LEFT))
+        if (newAngel <= 0.0)
         {
-            TurnY(-shiftAngel);
+            currentAngel = 360.0 + newAngel;
         }
-
-        if (keyHandler->IsKeyPress(eKeys::KEY_RIGHT))
+        if (newAngel > 0.0 && newAngel < 360.0)
         {
-            TurnY(shiftAngel);
+            currentAngel = newAngel;
         }
     }
 

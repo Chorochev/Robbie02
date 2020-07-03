@@ -1,20 +1,22 @@
 /* Класс для камеры */
-#ifndef PROJECT_GEOMETRY_CAMERACUSTOM_H
-#define PROJECT_GEOMETRY_CAMERACUSTOM_H
+#ifndef PROJECT_GEOMETRY_CAMERAGLUT_H
+#define PROJECT_GEOMETRY_CAMERAGLUT_H
 
 #include <geometry/CameraBase.h>
 #include <geometry/RobVector.h>
 
 namespace robbiespace
 {
-    class CameraCustom : public CameraBase
+    class CameraGlut : public CameraBase
     {
     private:
-        public:
+        RobVector vecTranslate;
+
+    public:
         // Инициализация камеры
         // speed_move - Скорость движения камеры
         // shift_angel - Угол поворота камеры
-        CameraCustom(float speed_move, double shift_angel);
+        CameraGlut(float speed_move, double shift_angel);
 
         // установка камеры
         void LookAt();

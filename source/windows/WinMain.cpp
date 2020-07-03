@@ -11,8 +11,9 @@ namespace robbiespace
 
     WinMain::WinMain() : WinBase("Robbie", "main", 400, 400, 200, 200)
     {
-        winMainPoint = this;        
-        camera = &cameraCustom;
+        winMainPoint = this;
+        //camera = &cameraCustom;
+        camera = &cameraGlut;
     }
 
     WinMain::~WinMain()
@@ -36,16 +37,16 @@ namespace robbiespace
         // установка камеры
         camera->LookAt();
 
-        glPushMatrix();        
-        //worldScena->Floor();        
+        glPushMatrix();
+        //worldScena->Floor();
         worldScena->FloorCells(8, 8);
         worldScena->Walls();
         glPopMatrix();
 
         glPushMatrix();
         globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 1, GetMessageForConsole());
-        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 2, camera->GetMessageForConsole());        
-        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 3, keyHandler.GetMessageForConsole());        
+        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 2, camera->GetMessageForConsole());
+        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 3, keyHandler.GetMessageForConsole());
         glPopMatrix();
         // Переключение буферов
         glutSwapBuffers();
@@ -79,9 +80,9 @@ namespace robbiespace
 
     // Основной таймер
     void WinMain::MainTimer(int value)
-    {        
-        glutSetWindow(idWindow);    
-        camera->HandlerKeyPressed(&keyHandler);        
+    {
+        glutSetWindow(idWindow);
+        camera->HandlerKeyPressed(&keyHandler);
         glutPostRedisplay();
 
         if (keyHandler.IsKeyPress(eKeys::Exit))

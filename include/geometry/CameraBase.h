@@ -23,6 +23,8 @@ namespace robbiespace
         float speedMove;   // Скорость движения камеры
         double shiftAngel; // Угол поворота камеры
 
+        void IncCurrentAngel(double addAngel);
+
     public:
         // Инициализация камеры
         // speed_move - Скорость движения камеры
@@ -62,7 +64,7 @@ namespace robbiespace
 
         // Обработка клавиш
         // keyHandler - указатель на обработчик клавиш
-        void HandlerKeyPressed(KeyHandler *keyHandler);
+        virtual void HandlerKeyPressed(KeyHandler *keyHandler){};
 
         // Сообщение для консоли
         string GetMessageForConsole();

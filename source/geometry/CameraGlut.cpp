@@ -1,55 +1,44 @@
 #include <GL/glut.h>
-#include <geometry/CameraCustom.h>
-#include <geometry/VectorHelper.h>
+#include <geometry/CameraGlut.h>
 
 namespace robbiespace
 {
     // Инициализация камеры
     // speed_move - Скорость движения камеры
     // shift_angel - Угол поворота камеры
-    CameraCustom::CameraCustom(float speed_move, double shift_angel) : CameraBase(speed_move, shift_angel)
+    CameraGlut::CameraGlut(float speed_move, double shift_angel) : CameraBase(speed_move, shift_angel)
     {
     }
 
     // установка камеры
-    void CameraCustom::LookAt()
+    void CameraGlut::LookAt()
     {
         // установка камеры
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        glRotatef(currentAngel, 0.0, 1.0, 0.0);                       // Rotate on y
+        glTranslatef(vecTranslate.X, vecTranslate.Y, vecTranslate.Z); // Translates the screen left or right,
         gluLookAt(currentEye.X, currentEye.Y, currentEye.Z, currentCenter.X, currentCenter.Y, currentCenter.Z, currentUp.X, currentUp.Y, currentUp.Z);
     }
 
     // Сдвинуть камеру вперед или назад
     // step - переместить камеру
-    void CameraCustom::Move(float step)
+    void CameraGlut::Move(float step)
     {
-        // Нормализуем вектор
-        RobVector normVec = currentCenter - currentEye;
-        // Удлиняем нормализованный вектор
-        RobVector addVec = normVec * (1.0 + step);
-        // Находим вектор сдвига
-        RobVector shiftVec = addVec - normVec;
-        // Сдвигаем вектора положения камеры и направление вида на вектор сдвига
-        currentEye = currentEye + shiftVec;
-        currentCenter = currentCenter + shiftVec;
+        vecTranslate.Z += step;
     }
 
     // Повернуть камеру вокруг оси Y
     // shiftAngel - угол на который нужно повернуть
-    void CameraCustom::TurnY(double shiftAngel)
+    void CameraGlut::TurnY(double shiftAngel)
     {
         // Смещаем текущий угол - только для консоли
         IncCurrentAngel(shiftAngel);
-        // Нормализуем вектор
-        RobVector normVec = currentCenter - currentEye;
-        // Поворачиваем нормализованный вектор на заданный угол
-        RobVector newVec = globalVectorHelper.RotateY(normVec, shiftAngel);
-        // Возвращаем новый вектор на место
-        currentCenter = currentEye + newVec;
     }
 
     // Обработка клавиш
     // keyHandler - указатель на обработчик клавиш
-    void CameraCustom::HandlerKeyPressed(KeyHandler *keyHandler)
+    void CameraGlut::HandlerKeyPressed(KeyHandler *keyHandler)
     {
         if (keyHandler->IsKeyPress(eKeys::KEY_UP))
         {
@@ -71,5 +60,4 @@ namespace robbiespace
             TurnY(shiftAngel);
         }
     }
-
 } // namespace robbiespace
