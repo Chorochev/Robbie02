@@ -22,7 +22,11 @@ namespace robbiespace
         keys[5] = {"iKeyDOWN", "DOWN", GLUT_KEY_DOWN, eKeys::KEY_DOWN, eDeviceKey::KeyboardSpec, false, 0, 0};
         keys[6] = {"iKeyPAGE_UP", "PAGE_UP", GLUT_KEY_PAGE_UP, eKeys::PAGE_UP, eDeviceKey::KeyboardSpec, false, 0, 0};
         keys[7] = {"iKeyPAGE_DOWN", "PAGE_DOWN", GLUT_KEY_PAGE_DOWN, eKeys::PAGE_DOWN, eDeviceKey::KeyboardSpec, false, 0, 0};
-
+        keys[8] = {"iKeyKEY_F1", "KEY_F1", GLUT_KEY_F1, eKeys::KEY_F1, eDeviceKey::KeyboardSpec, false, 0, 0};
+        keys[9] = {"iKeyKEY_F2", "KEY_F2", GLUT_KEY_F2, eKeys::KEY_F2, eDeviceKey::KeyboardSpec, false, 0, 0};
+        keys[10] = {"iKeyKEY_F3", "KEY_F3", GLUT_KEY_F3, eKeys::KEY_F3, eDeviceKey::KeyboardSpec, false, 0, 0};
+        keys[11] = {"iKeyKEY_F4", "KEY_F4", GLUT_KEY_F4, eKeys::KEY_F4, eDeviceKey::KeyboardSpec, false, 0, 0};
+       
         // Неопознанные клавиши
         unknownKeys[0] = {"iKeyUnknown1", "Unknown1", 0, eKeys::Unknown, eDeviceKey::Unknown, false, 0, 0};
         unknownKeys[1] = {"iKeyUnknown2", "Unknown2", 0, eKeys::Unknown, eDeviceKey::Unknown, false, 0, 0};

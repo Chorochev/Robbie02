@@ -23,7 +23,11 @@ namespace robbiespace
         KEY_RIGHT, // Стрелка вправо
         KEY_DOWN,  // Стрелка вниз
         PAGE_UP,   // Вверх
-        PAGE_DOWN  // Вниз
+        PAGE_DOWN, // Вниз
+        KEY_F1,    // F1
+        KEY_F2,    // F2
+        KEY_F3,    // F3
+        KEY_F4     // F4
     };
 
     // Типы устройств
