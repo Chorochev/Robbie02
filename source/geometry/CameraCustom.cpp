@@ -1,5 +1,5 @@
 #include <GL/glut.h>
-#include <geometry/Camera.h>
+#include <geometry/CameraCustom.h>
 #include <geometry/VectorHelper.h>
 
 namespace robbiespace
@@ -8,12 +8,12 @@ namespace robbiespace
     // Инициализация камеры
     // speed_move - Скорость движения камеры
     // shift_angel - Угол поворота камеры
-    Camera::Camera(float speed_move, double shift_angel) : CameraBase(speed_move, shift_angel)
+    CameraCustom::CameraCustom(float speed_move, double shift_angel) : CameraBase(speed_move, shift_angel)
     {       
     }
 
     // установка камеры
-    void Camera::LookAt()
+    void CameraCustom::LookAt()
     {
         // установка камеры
         gluLookAt(currentEye.X, currentEye.Y, currentEye.Z, currentCenter.X, currentCenter.Y, currentCenter.Z, currentUp.X, currentUp.Y, currentUp.Z);
@@ -21,7 +21,7 @@ namespace robbiespace
 
     // Увеличиваем текущий угол камеры
     // addAngel - добавочный угол
-    void Camera::IncCurrentAngel(double addAngel)
+    void CameraCustom::IncCurrentAngel(double addAngel)
     {
         double newAngel = currentAngel + addAngel;
         if (newAngel >= 0.0 && newAngel <= 360.0)
@@ -34,7 +34,7 @@ namespace robbiespace
 
     // Сдвинуть камеру вперед или назад
     // step - переместить камеру
-    void Camera::Move(float step)
+    void CameraCustom::Move(float step)
     {
         // Нормализуем вектор
         RobVector normVec = currentCenter - currentEye;
@@ -49,7 +49,7 @@ namespace robbiespace
 
     // Повернуть камеру вокруг оси Y
     // shiftAngel - угол на который нужно повернуть
-    void Camera::TurnY(double shiftAngel)
+    void CameraCustom::TurnY(double shiftAngel)
     {
         // Смещаем текущий угол - только для консоли
         IncCurrentAngel(shiftAngel);

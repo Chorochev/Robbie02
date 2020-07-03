@@ -1,15 +1,13 @@
 /* Класс для камеры */
-#ifndef PROJECT_GEOMETRY_CAMERA_H
-#define PROJECT_GEOMETRY_CAMERA_H
+#ifndef PROJECT_GEOMETRY_CAMERACUSTOM_H
+#define PROJECT_GEOMETRY_CAMERACUSTOM_H
 
 #include <geometry/CameraBase.h>
 #include <geometry/RobVector.h>
 
-using namespace std;
-
 namespace robbiespace
 {
-    class Camera : public CameraBase
+    class CameraCustom : public CameraBase
     {
     private:
         void IncCurrentAngel(double addAngel);
@@ -18,7 +16,7 @@ namespace robbiespace
         // Инициализация камеры
         // speed_move - Скорость движения камеры
         // shift_angel - Угол поворота камеры
-        Camera(float speed_move, double shift_angel);
+        CameraCustom(float speed_move, double shift_angel);
 
         // установка камеры
         void LookAt();

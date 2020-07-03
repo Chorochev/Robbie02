@@ -12,7 +12,7 @@ namespace robbiespace
     WinMain::WinMain() : WinBase("Robbie", "main", 400, 400, 200, 200)
     {
         winMainPoint = this;        
-        camera = &myCamera;
+        camera = &cameraCustom;
     }
 
     WinMain::~WinMain()

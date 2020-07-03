@@ -1,4 +1,4 @@
-/* Класс для камеры */
+/* Базовый класс для камеры */
 #ifndef PROJECT_GEOMETRY_CAMERABASE_H
 #define PROJECT_GEOMETRY_CAMERABASE_H
 
