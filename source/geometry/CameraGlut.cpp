@@ -47,10 +47,10 @@ namespace robbiespace
             MoveX(-speedMove);
 
         if (keyHandler->IsKeyPress(eKeys::PAGE_UP))
-            MoveY(speedMove);
+            MoveY(-speedMove);
 
         if (keyHandler->IsKeyPress(eKeys::PAGE_DOWN))
-            MoveY(-speedMove);
+            MoveY(speedMove);
     }
 
     // Сообщение для консоли

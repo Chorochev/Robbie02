@@ -38,8 +38,8 @@ namespace robbiespace
         camera->LookAt();
 
         glPushMatrix();
-        //worldScena->Floor();
-        worldScena->FloorCells(8, 8);
+        //worldScena->Floor();             
+        worldScena->FloorCells(8, 8);       
         worldScena->Walls();
         glPopMatrix();
 
@@ -143,7 +143,7 @@ namespace robbiespace
     void WinMain::Create(World *world)
     {
         worldScena = world;
-
+       
         // GLUT_DEPTH - Буфер глубины. Используется для отсечения невидимых линий в 3D пространстве при выводе на плоский экран монитора.
         // GLUT_DOUBLE - Двойная буферизация.
         // GLUT_RGB - Цвет состоит из 3х компонентов цвета RGB.
@@ -153,6 +153,9 @@ namespace robbiespace
         // Местоположение окна
         glutInitWindowPosition(iWindowPositionX, iWindowPositionY);
         idWindow = glutCreateWindow(sNameWindow.c_str());
+
+        // Включаем отсечение. *включать нужно после создания окна.
+        glEnable(GL_DEPTH_TEST);  
 
         glutDisplayFunc(DisplayFuncForWinMain);             // Установка функции для рисования
         glutReshapeFunc(ReshapeFuncForWinMain);             // Установка функции в случае изменения размеров окна
