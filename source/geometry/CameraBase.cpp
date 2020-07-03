@@ -10,6 +10,7 @@ namespace robbiespace
     // shift_angel - Угол поворота камеры
     CameraBase::CameraBase(float speed_move, double shift_angel)
     {
+        nameCamera = "CameraBase";        
         // Текущее положение камеры
         currentEye.Y = 0.25f;
         // Текущая точка зрения камеры (куда камера смотрит)
@@ -48,12 +49,13 @@ namespace robbiespace
 
     // Сообщение для консоли
     string CameraBase::GetMessageForConsole()
-    {
-        string resultStr = "Camera: ";
-        resultStr += "angel = " + std::to_string(currentAngel) + " ";
-        resultStr += "eye[" + std::to_string(currentEye.X) + ";" + std::to_string(currentEye.Y) + ";" + std::to_string(currentEye.Z) + "] ";
-        resultStr += "center[" + std::to_string(currentCenter.X) + ";" + std::to_string(currentCenter.Y) + ";" + std::to_string(currentCenter.Z) + "] ";
-        return resultStr;
+    {               
+        strConsole = nameCamera;
+        strConsole += ": ";
+        strConsole += "angel=" + std::to_string(currentAngel) + " ";
+        strConsole += "eye[" + std::to_string(currentEye.X) + ";" + std::to_string(currentEye.Y) + ";" + std::to_string(currentEye.Z) + "] ";
+        strConsole += "center[" + std::to_string(currentCenter.X) + ";" + std::to_string(currentCenter.Y) + ";" + std::to_string(currentCenter.Z) + "] ";
+        return strConsole;
     }
 
 } // namespace robbiespace

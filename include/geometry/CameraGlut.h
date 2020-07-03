@@ -21,9 +21,17 @@ namespace robbiespace
         // установка камеры
         void LookAt();
 
-        // Сдвинуть камеру вперед или назад
-        // step - переместить камеру
-        void Move(float step);
+        // Сдвинуть камеру вперед или назад по оси X
+        // step - размер сдвига камеры
+        inline void MoveX(float step) { vecTranslate.X += step; };
+
+        // Сдвинуть камеру вперед или назад по оси Y
+        // step - размер сдвига камеры
+        inline void MoveY(float step) { vecTranslate.Y += step; };
+
+        // Сдвинуть камеру вперед или назад по оси Z
+        // step - размер сдвига камеры
+        inline void MoveZ(float step) { vecTranslate.Z += step; };
 
         // Повернуть камеру вокруг оси Y
         // shiftAngel - угол на который нужно повернуть
@@ -32,6 +40,9 @@ namespace robbiespace
         // Обработка клавиш
         // keyHandler - указатель на обработчик клавиш
         void HandlerKeyPressed(KeyHandler *keyHandler);
+
+        // Сообщение для консоли
+        string GetMessageForConsole();
     };
 } // namespace robbiespace
 

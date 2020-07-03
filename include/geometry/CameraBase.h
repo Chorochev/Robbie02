@@ -12,6 +12,8 @@ namespace robbiespace
     class CameraBase
     {
     protected:
+        string nameCamera;       // Наименование камеры
+        string strConsole;       // Строка для консоли
         RobVector currentEye;    // Текущее положение камеры
         RobVector currentCenter; // Текущая точка зрения камеры (куда камера смотрит)
         RobVector currentUp;     // Текущий угол поворота камеры
@@ -55,8 +57,20 @@ namespace robbiespace
         virtual void LookAt(){};
 
         // Сдвинуть камеру вперед или назад
-        // step - переместить камеру
+        // step - размер сдвига камеры
         virtual void Move(float step){};
+
+        // Сдвинуть камеру вперед или назад по оси X
+        // step - размер сдвига камеры
+        virtual void MoveX(float step){};
+
+        // Сдвинуть камеру вперед или назад по оси Y
+        // step - размер сдвига камеры
+        virtual void MoveY(float step){};
+
+        // Сдвинуть камеру вперед или назад по оси Z
+        // step - размер сдвига камеры
+        virtual void MoveZ(float step){};
 
         // Повернуть камеру вокруг оси Y
         // shiftAngel - угол на который нужно повернуть
@@ -67,7 +81,7 @@ namespace robbiespace
         virtual void HandlerKeyPressed(KeyHandler *keyHandler){};
 
         // Сообщение для консоли
-        string GetMessageForConsole();
+        virtual string GetMessageForConsole();
     };
 
 } // namespace robbiespace

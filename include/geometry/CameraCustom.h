@@ -20,7 +20,7 @@ namespace robbiespace
         void LookAt();
 
         // Сдвинуть камеру вперед или назад
-        // step - переместить камеру
+        // step - размер сдвига камеры
         void Move(float step);
 
         // Повернуть камеру вокруг оси Y

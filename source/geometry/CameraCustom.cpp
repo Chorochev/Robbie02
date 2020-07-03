@@ -9,6 +9,7 @@ namespace robbiespace
     // shift_angel - Угол поворота камеры
     CameraCustom::CameraCustom(float speed_move, double shift_angel) : CameraBase(speed_move, shift_angel)
     {
+        nameCamera = "CameraCustom"; 
     }
 
     // установка камеры

@@ -8,6 +8,7 @@ namespace robbiespace
     // shift_angel - Угол поворота камеры
     CameraGlut::CameraGlut(float speed_move, double shift_angel) : CameraBase(speed_move, shift_angel)
     {
+        nameCamera = "CameraGlut";
     }
 
     // установка камеры
@@ -21,18 +22,11 @@ namespace robbiespace
         gluLookAt(currentEye.X, currentEye.Y, currentEye.Z, currentCenter.X, currentCenter.Y, currentCenter.Z, currentUp.X, currentUp.Y, currentUp.Z);
     }
 
-    // Сдвинуть камеру вперед или назад
-    // step - переместить камеру
-    void CameraGlut::Move(float step)
-    {
-        vecTranslate.Z += step;
-    }
-
     // Повернуть камеру вокруг оси Y
     // shiftAngel - угол на который нужно повернуть
     void CameraGlut::TurnY(double shiftAngel)
     {
-        // Смещаем текущий угол - только для консоли
+        // Смещаем текущий угол
         IncCurrentAngel(shiftAngel);
     }
 
@@ -42,22 +36,32 @@ namespace robbiespace
     {
         if (keyHandler->IsKeyPress(eKeys::KEY_UP))
         {
-            Move(speedMove);
+            MoveZ(speedMove);
         }
 
         if (keyHandler->IsKeyPress(eKeys::KEY_DOWN))
         {
-            Move(-speedMove);
+            MoveZ(-speedMove);
         }
 
         if (keyHandler->IsKeyPress(eKeys::KEY_LEFT))
         {
-            TurnY(-shiftAngel);
+            MoveX(speedMove);
         }
 
         if (keyHandler->IsKeyPress(eKeys::KEY_RIGHT))
         {
-            TurnY(shiftAngel);
+            MoveX(-speedMove);
         }
+    }
+
+    // Сообщение для консоли
+    string CameraGlut::GetMessageForConsole()
+    {
+        strConsole = nameCamera;
+        strConsole += ": ";
+        strConsole += "angel=" + std::to_string(currentAngel) + " ";
+        strConsole += "translate[" + std::to_string(vecTranslate.X) + ";" + std::to_string(vecTranslate.Y) + ";" + std::to_string(vecTranslate.Z) + "] ";
+        return strConsole;
     }
 } // namespace robbiespace
