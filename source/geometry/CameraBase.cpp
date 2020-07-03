@@ -10,7 +10,7 @@ namespace robbiespace
     // shift_angel - Угол поворота камеры
     CameraBase::CameraBase(float speed_move, double shift_angel)
     {
-        nameCamera = "CameraBase";        
+        nameCamera = "CameraBase";
         // Текущее положение камеры
         currentEye.Y = 0.25f;
         // Текущая точка зрения камеры (куда камера смотрит)
@@ -21,15 +21,18 @@ namespace robbiespace
         // Нормализованный вектор вращения
         rotVector.Z = sizeVector;
         // Текущий угол камеры (0-360 гр.)
-        currentAngel = 0.0;
+        currentAngelOX = 0.0; // Текущий угол камеры (0-360 гр.) по оси X
+        currentAngelOY = 0.0; // Текущий угол камеры (0-360 гр.) по оси Y
+        currentAngelOZ = 0.0; // Текущий угол камеры (0-360 гр.) по оси Z
 
         speedMove = speed_move;
         shiftAngel = shift_angel;
     }
 
-    // Увеличиваем текущий угол камеры
+    // Получаем увеличенный текущий угол камеры
+    // currentAngel - Текущий угол
     // addAngel - добавочный угол
-    void CameraBase::IncCurrentAngel(double addAngel)
+    double CameraBase::GetShiftAngel(double currentAngel, double addAngel)
     {
         double newAngel = currentAngel + addAngel;
 
@@ -45,14 +48,15 @@ namespace robbiespace
         {
             currentAngel = newAngel;
         }
+        return currentAngel;
     }
 
     // Сообщение для консоли
     string CameraBase::GetMessageForConsole()
-    {               
+    {
         strConsole = nameCamera;
         strConsole += ": ";
-        strConsole += "angel=" + std::to_string(currentAngel) + " ";
+        strConsole += "angels=[" + std::to_string(currentAngelOX) + ";" + std::to_string(currentAngelOY) + ";" + std::to_string(currentAngelOX) + "] ";
         strConsole += "eye[" + std::to_string(currentEye.X) + ";" + std::to_string(currentEye.Y) + ";" + std::to_string(currentEye.Z) + "] ";
         strConsole += "center[" + std::to_string(currentCenter.X) + ";" + std::to_string(currentCenter.Y) + ";" + std::to_string(currentCenter.Z) + "] ";
         return strConsole;

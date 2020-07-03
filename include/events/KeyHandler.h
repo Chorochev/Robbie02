@@ -30,6 +30,13 @@ namespace robbiespace
         StructKey keys[SIZE_STRUCTKEY_ARRAY];                // Массив обрабатываемых клавиш
         StructKey unknownKeys[SIZE_UNKNOWN_STRUCTKEY_ARRAY]; // Массив неопознанных обрабатываемых клавиш
 
+        bool mouseIsChangedOX; // Признак изменения координаты мышки по оси X
+        bool mouseIsChangedOY; // Признак изменения координаты мышки по оси Y
+        int currentMouseOX;    // Текущее положение мышки по оси X
+        int currentMouseOY;    // Текущее положение мышки по оси Y
+        int oldMouseOX;        // Предыдущее положение мышки по оси X
+        int oldMouseOY;        // Предыдущее положение мышки по оси Y
+
         // Функция для обработки неизвестной клавиши
         // key - код клавиши
         // x - координата мыши по оси X
@@ -59,6 +66,22 @@ namespace robbiespace
         // isPress - признак нажатия клавиши
         // TypeDevice - Тип устройства
         void FunctionKeyboard(int key, int x, int y, bool isPress, eDeviceKey typeDevice);
+
+        // Функция для отслеживания пассивного движения мыши (с нажатой кнопкой)
+        // x - координата мыши по оси X
+        // y - координата мыши по оси Y
+        void MotionFunc(int x, int y);
+
+        // Функция для отслеживания пассивного движения мыши (без нажатия кнопки)
+        // x - координата мыши по оси X
+        // y - координата мыши по оси Y
+        void PassiveMotionFunc(int x, int y);
+
+        // Получить сдвиг мышки по оси X
+        int GetMouseShiftOX();
+
+        // Получить сдвиг мышки по оси Y
+        int GetMouseShiftOY();
 
         // Функция для проверки нажатия клавиши
         // key - тип клавиши

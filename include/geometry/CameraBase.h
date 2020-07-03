@@ -20,12 +20,17 @@ namespace robbiespace
 
         const float sizeVector = 1.0f; // размер нормализованного вектора
         RobVector rotVector;           // Нормализованный вектор вращения
-        double currentAngel;           // Текущий угол камеры (0-360 гр.) - Только для консоли
+        double currentAngelOX;         // Текущий угол камеры (0-360 гр.) по оси X
+        double currentAngelOY;         // Текущий угол камеры (0-360 гр.) по оси Y
+        double currentAngelOZ;         // Текущий угол камеры (0-360 гр.) по оси Z
 
         float speedMove;   // Скорость движения камеры
         double shiftAngel; // Угол поворота камеры
 
-        void IncCurrentAngel(double addAngel);
+        // Получаем увеличенный текущий угол камеры
+        // currentAngel - Текущий угол
+        // addAngel - добавочный угол
+        double GetShiftAngel(double currentAngel, double addAngel);
 
     public:
         // Инициализация камеры
@@ -72,9 +77,17 @@ namespace robbiespace
         // step - размер сдвига камеры
         virtual void MoveZ(float step){};
 
+        // Повернуть камеру вокруг оси X
+        // shiftAngel - угол на который нужно повернуть
+        virtual void TurnX(double shiftAngel) { currentAngelOX = GetShiftAngel(currentAngelOX, shiftAngel); };
+
         // Повернуть камеру вокруг оси Y
         // shiftAngel - угол на который нужно повернуть
-        virtual void TurnY(double shiftAngel){};
+        virtual void TurnY(double shiftAngel) { currentAngelOY = GetShiftAngel(currentAngelOY, shiftAngel); };
+
+        // Повернуть камеру вокруг оси Z
+        // shiftAngel - угол на который нужно повернуть
+        virtual void TurnZ(double shiftAngel) { currentAngelOZ = GetShiftAngel(currentAngelOZ, shiftAngel); };
 
         // Обработка клавиш
         // keyHandler - указатель на обработчик клавиш

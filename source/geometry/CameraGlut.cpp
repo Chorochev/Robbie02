@@ -17,17 +17,10 @@ namespace robbiespace
         // установка камеры
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        glRotatef(currentAngel, 0.0, 1.0, 0.0);                       // Rotate on y
+        glRotatef(currentAngelOX, 1.0, 0.0, 0.0);                     // Rotate on x
+        glRotatef(currentAngelOY, 0.0, 1.0, 0.0);                     // Rotate on y
         glTranslatef(vecTranslate.X, vecTranslate.Y, vecTranslate.Z); // Translates the screen left or right,
         gluLookAt(currentEye.X, currentEye.Y, currentEye.Z, currentCenter.X, currentCenter.Y, currentCenter.Z, currentUp.X, currentUp.Y, currentUp.Z);
-    }
-
-    // Повернуть камеру вокруг оси Y
-    // shiftAngel - угол на который нужно повернуть
-    void CameraGlut::TurnY(double shiftAngel)
-    {
-        // Смещаем текущий угол
-        IncCurrentAngel(shiftAngel);
     }
 
     // Обработка клавиш
@@ -51,6 +44,9 @@ namespace robbiespace
 
         if (keyHandler->IsKeyPress(eKeys::PAGE_DOWN))
             MoveY(speedMove);
+        // Обработка движения мышки
+        TurnX(keyHandler->GetMouseShiftOY());
+        TurnY(keyHandler->GetMouseShiftOX());        
     }
 
     // Сообщение для консоли
@@ -58,7 +54,7 @@ namespace robbiespace
     {
         strConsole = nameCamera;
         strConsole += ": ";
-        strConsole += "angel=" + std::to_string(currentAngel) + " ";
+        strConsole += "angels=[" + std::to_string(currentAngelOX) + ";" + std::to_string(currentAngelOY) + ";" + std::to_string(currentAngelOX) + "] ";
         strConsole += "translate[" + std::to_string(vecTranslate.X) + ";" + std::to_string(vecTranslate.Y) + ";" + std::to_string(vecTranslate.Z) + "] ";
         return strConsole;
     }

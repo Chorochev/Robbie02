@@ -138,7 +138,19 @@ namespace robbiespace
     void MainTimerForWinMain(int value)
     {
         winMainPoint->MainTimer(value);
-        glutTimerFunc(40, MainTimerForWinMain, 0);
+        glutTimerFunc(DELAY_FOR_TIMER_WINMAIN, MainTimerForWinMain, 0);
+    }
+
+    // Функция переходник для вызова нестатического метода класса для отслеживания движения мыши (с нажатой кнопкой)
+    void MotionFuncForWinMain(int x, int y)
+    {
+        winMainPoint->keyHandler.MotionFunc(x, y);
+    }
+
+    // Функция переходник для вызова нестатического метода класса для отслеживания пассивного движения мыши (без нажатия кнопки)
+    void PassiveMotionFuncForWindowGeneral(int x, int y)
+    {
+        winMainPoint->keyHandler.PassiveMotionFunc(x, y);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -170,7 +182,12 @@ namespace robbiespace
         glutSpecialFunc(KeyboardSpecialFuncForWinMain);     // Установка функции для обработки нажатия специальных клавиши клавиатуры
         glutSpecialUpFunc(KeyboardSpecialUpFuncForWinMain); // Установка функции для обработки отжатия специальных клавиши клавиатуры
 
-        glutTimerFunc(40, MainTimerForWinMain, 0);
+        //glutMouseFunc(MouseFuncForWindowGeneral);                 // Установка функции для обработки данных с мышки
+        glutMotionFunc(MotionFuncForWinMain); // Установка функции для отслеживания активного движения мышки (с нажатой кнопкой)
+        //glutPassiveMotionFunc(PassiveMotionFuncForWinMain); // Установка функции для отслеживания пассивного движения мыши (без нажатия кнопки)
+        //glutEntryFunc(EntryFuncForWindowGeneral);                 // Установка функции для отслеживания выхода курсора за пределы окна
+
+        glutTimerFunc(DELAY_FOR_TIMER_WINMAIN, MainTimerForWinMain, 0);
     }
 
 } // namespace robbiespace

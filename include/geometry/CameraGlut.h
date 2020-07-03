@@ -33,10 +33,6 @@ namespace robbiespace
         // step - размер сдвига камеры
         inline void MoveZ(float step) { vecTranslate.Z += step; };
 
-        // Повернуть камеру вокруг оси Y
-        // shiftAngel - угол на который нужно повернуть
-        void TurnY(double shiftAngel);
-
         // Обработка клавиш
         // keyHandler - указатель на обработчик клавиш
         void HandlerKeyPressed(KeyHandler *keyHandler);

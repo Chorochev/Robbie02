@@ -9,7 +9,7 @@ namespace robbiespace
     // shift_angel - Угол поворота камеры
     CameraCustom::CameraCustom(float speed_move, double shift_angel) : CameraBase(speed_move, shift_angel)
     {
-        nameCamera = "CameraCustom"; 
+        nameCamera = "CameraCustom";
     }
 
     // установка камеры
@@ -39,7 +39,7 @@ namespace robbiespace
     void CameraCustom::TurnY(double shiftAngel)
     {
         // Смещаем текущий угол - только для консоли
-        IncCurrentAngel(shiftAngel);
+        currentAngelOY = GetShiftAngel(currentAngelOY, shiftAngel);
         // Нормализуем вектор
         RobVector normVec = currentCenter - currentEye;
         // Поворачиваем нормализованный вектор на заданный угол

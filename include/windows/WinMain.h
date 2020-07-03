@@ -2,6 +2,8 @@
 #ifndef PROJECT_WINDOWS_WINMAIN_H
 #define PROJECT_WINDOWS_WINMAIN_H
 
+#define DELAY_FOR_TIMER_WINMAIN 30 
+
 #include <string>
 
 #include <windows/WinBase.h>

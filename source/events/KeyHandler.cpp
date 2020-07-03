@@ -9,6 +9,12 @@ namespace robbiespace
     {
         SetDefaultKeys();
         LoadKeyValues();
+        mouseIsChangedOX = false;
+        mouseIsChangedOY = false;
+        currentMouseOX = 0; // Текущее положение мышки по оси X
+        currentMouseOY = 0; // Текущее положение мышки по оси Y
+        oldMouseOX = 0;     // Предыдущее положение мышки по оси X
+        oldMouseOY = 0;     // Предыдущее положение мышки по оси Y
     }
 
     // Установка клавиш по умолчанию
@@ -26,7 +32,7 @@ namespace robbiespace
         keys[9] = {"iKeyKEY_F2", "KEY_F2", GLUT_KEY_F2, eKeys::KEY_F2, eDeviceKey::KeyboardSpec, false, 0, 0};
         keys[10] = {"iKeyKEY_F3", "KEY_F3", GLUT_KEY_F3, eKeys::KEY_F3, eDeviceKey::KeyboardSpec, false, 0, 0};
         keys[11] = {"iKeyKEY_F4", "KEY_F4", GLUT_KEY_F4, eKeys::KEY_F4, eDeviceKey::KeyboardSpec, false, 0, 0};
-       
+
         // Неопознанные клавиши
         unknownKeys[0] = {"iKeyUnknown1", "Unknown1", 0, eKeys::Unknown, eDeviceKey::Unknown, false, 0, 0};
         unknownKeys[1] = {"iKeyUnknown2", "Unknown2", 0, eKeys::Unknown, eDeviceKey::Unknown, false, 0, 0};
@@ -137,6 +143,61 @@ namespace robbiespace
         return false;
     }
 
+    // Функция для отслеживания пассивного движения мыши (с нажатой кнопкой)
+    // x - координата мыши по оси X
+    // y - координата мыши по оси Y
+    void KeyHandler::MotionFunc(int x, int y)
+    {
+        mouseIsChangedOX = true;     // Устанавливаем флаг указывающий на изменение координат мышки
+        mouseIsChangedOY = true;     // Устанавливаем флаг указывающий на изменение координат мышки
+        oldMouseOX = currentMouseOX; // Запоминаем положение мышки по оси X
+        oldMouseOY = currentMouseOY; // Запоминаем положение мышки по оси Y
+
+        currentMouseOX = x; // Запоминаем положение мышки по оси X
+        currentMouseOY = y; // Запоминаем положение мышки по оси Y
+    }
+
+
+    // Функция для отслеживания пассивного движения мыши (без нажатия кнопки)
+    // x - координата мыши по оси X
+    // y - координата мыши по оси Y
+    void KeyHandler::PassiveMotionFunc(int x, int y)
+    {
+        mouseIsChangedOX = true;     // Устанавливаем флаг указывающий на изменение координат мышки
+        mouseIsChangedOY = true;     // Устанавливаем флаг указывающий на изменение координат мышки
+        oldMouseOX = currentMouseOX; // Запоминаем положение мышки по оси X
+        oldMouseOY = currentMouseOY; // Запоминаем положение мышки по оси Y
+
+        currentMouseOX = x; // Запоминаем положение мышки по оси X
+        currentMouseOY = y; // Запоминаем положение мышки по оси Y
+    }
+
+    // Получить сдвиг мышки по оси X
+    int KeyHandler::GetMouseShiftOX()
+    {
+        int result = 0;
+        if (mouseIsChangedOX)
+        {
+            mouseIsChangedOX = false; // Устанавливаем флаг указывающий на то что измененные координаты получены
+            result = currentMouseOX - oldMouseOX;
+            oldMouseOX = currentMouseOX;
+        }
+        return result;
+    }
+
+    // Получить сдвиг мышки по оси Y
+    int KeyHandler::GetMouseShiftOY()
+    {
+        int result = 0;
+        if (mouseIsChangedOY)
+        {
+            mouseIsChangedOY = false; // Устанавливаем флаг указывающий на то что измененные координаты получены
+            result = currentMouseOY - oldMouseOY;
+            oldMouseOY = currentMouseOY;
+        }
+        return result;
+    }
+
     // Сообщение для консоли
     string KeyHandler::GetMessageForConsole()
     {
@@ -183,7 +244,8 @@ namespace robbiespace
     // Создание строки из структуры для консоли
     string KeyHandler::GetStringStructKey(StructKey rKey)
     {
-        string result = "(";
+        string result = "Mouse [" + std::to_string(currentMouseOX) + ";" + std::to_string(currentMouseOY) + "] ";
+        result += "Keys (";
         result += std::to_string(rKey.Value);
 
         if (rKey.Value < 128 && rKey.TypeDevice == eDeviceKey::Keyboard)
