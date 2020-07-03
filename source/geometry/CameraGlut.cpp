@@ -54,7 +54,7 @@ namespace robbiespace
     {
         strConsole = nameCamera;
         strConsole += ": ";
-        strConsole += "angels=[" + std::to_string(currentAngelOX) + ";" + std::to_string(currentAngelOY) + ";" + std::to_string(currentAngelOX) + "] ";
+        strConsole += "angels=[" + std::to_string(currentAngelOX) + ";" + std::to_string(currentAngelOY) + ";" + std::to_string(currentAngelOZ) + "] ";
         strConsole += "translate[" + std::to_string(vecTranslate.X) + ";" + std::to_string(vecTranslate.Y) + ";" + std::to_string(vecTranslate.Z) + "] ";
         return strConsole;
     }
