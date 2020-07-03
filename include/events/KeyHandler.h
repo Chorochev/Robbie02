@@ -37,6 +37,8 @@ namespace robbiespace
         int oldMouseOX;        // Предыдущее положение мышки по оси X
         int oldMouseOY;        // Предыдущее положение мышки по оси Y
 
+        int MouseWheelDir; // Направление колеса мыши
+
         // Функция для обработки неизвестной клавиши
         // key - код клавиши
         // x - координата мыши по оси X
@@ -76,6 +78,11 @@ namespace robbiespace
         // x - координата мыши по оси X
         // y - координата мыши по оси Y
         void PassiveMotionFunc(int x, int y);
+
+        void MouseWheel(int button, int dir, int x, int y) { MouseWheelDir = dir; };
+
+        // Получить направление вращения колеса мыши
+        int GetDirectionMouseWheel();
 
         // Получить сдвиг мышки по оси X
         int GetMouseShiftOX();

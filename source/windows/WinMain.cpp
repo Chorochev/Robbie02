@@ -12,8 +12,8 @@ namespace robbiespace
     WinMain::WinMain() : WinBase("Robbie", "main", 400, 400, 200, 200)
     {
         winMainPoint = this;
-        //camera = &cameraCustom;
-        camera = &cameraGlut;
+        camera = &cameraCustom;
+        //camera = &cameraGlut;
     }
 
     WinMain::~WinMain()
@@ -69,13 +69,13 @@ namespace robbiespace
         // используем матрицу проекции
         glMatrixMode(GL_PROJECTION);
         // Reset матрицы
-        glLoadIdentity();
+        glLoadIdentity();        
         // определяем окно просмотра
         glViewport(0, 0, width, height);
         // установить корректную перспективу.
-        gluPerspective(45.0f, ratio, 0.1f, 100.0f);
+        gluPerspective(camera->Zoom, ratio, 0.1, 100.0);        
         // вернуться к модели
-        glMatrixMode(GL_MODELVIEW);
+        glMatrixMode(GL_MODELVIEW);        
     }
 
     // Основной таймер
@@ -93,6 +93,14 @@ namespace robbiespace
 
         if (keyHandler.IsKeyPress(eKeys::Exit))
             CloseWindow();
+
+        int wheelDir = keyHandler.GetDirectionMouseWheel();
+        int newZoom = camera->Zoom + wheelDir;
+        if (newZoom >= 1.0 && newZoom <= 45.0 && newZoom != camera->Zoom)
+        {
+            camera->Zoom = newZoom;
+            ReshapeFunc(iWindowSizeWidth, iWindowSizeHeight);
+        }
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
@@ -148,11 +156,15 @@ namespace robbiespace
     }
 
     // Функция переходник для вызова нестатического метода класса для отслеживания пассивного движения мыши (без нажатия кнопки)
-    void PassiveMotionFuncForWindowGeneral(int x, int y)
+    void PassiveMotionFuncWinMain(int x, int y)
     {
         winMainPoint->keyHandler.PassiveMotionFunc(x, y);
     }
 
+    void MouseWheelFuncWinMain(int button, int dir, int x, int y)
+    {
+        winMainPoint->keyHandler.MouseWheel(button, dir, x, y);
+    }
     /////////////////////////////////////////////////////////////////////////////////////
     // Функции переходники
     /////////////////////////////////////////////////////////////////////////////////////
@@ -186,6 +198,7 @@ namespace robbiespace
         glutMotionFunc(MotionFuncForWinMain); // Установка функции для отслеживания активного движения мышки (с нажатой кнопкой)
         //glutPassiveMotionFunc(PassiveMotionFuncForWinMain); // Установка функции для отслеживания пассивного движения мыши (без нажатия кнопки)
         //glutEntryFunc(EntryFuncForWindowGeneral);                 // Установка функции для отслеживания выхода курсора за пределы окна
+        glutMouseWheelFunc(MouseWheelFuncWinMain);
 
         glutTimerFunc(DELAY_FOR_TIMER_WINMAIN, MainTimerForWinMain, 0);
     }

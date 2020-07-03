@@ -38,6 +38,8 @@ namespace robbiespace
         // shift_angel - Угол поворота камеры
         CameraBase(float speed_move, double shift_angel);
 
+        double Zoom; // Зум камеры
+
         // Установка скорости перемещения камеры
         // speed_move - Скорость движения камеры
         inline void SetSpeedMove(float speed_move) { speedMove = speed_move; };

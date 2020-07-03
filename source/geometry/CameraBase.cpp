@@ -27,6 +27,8 @@ namespace robbiespace
 
         speedMove = speed_move;
         shiftAngel = shift_angel;
+
+        Zoom = 45.0f; // Зум камеры
     }
 
     // Получаем увеличенный текущий угол камеры
@@ -56,6 +58,7 @@ namespace robbiespace
     {
         strConsole = nameCamera;
         strConsole += ": ";
+        strConsole += "zoom=[" + std::to_string(Zoom) + "] ";
         strConsole += "angels=[" + std::to_string(currentAngelOX) + ";" + std::to_string(currentAngelOY) + ";" + std::to_string(currentAngelOZ) + "] ";
         strConsole += "eye[" + std::to_string(currentEye.X) + ";" + std::to_string(currentEye.Y) + ";" + std::to_string(currentEye.Z) + "] ";
         strConsole += "center[" + std::to_string(currentCenter.X) + ";" + std::to_string(currentCenter.Y) + ";" + std::to_string(currentCenter.Z) + "] ";

@@ -15,6 +15,8 @@ namespace robbiespace
         currentMouseOY = 0; // Текущее положение мышки по оси Y
         oldMouseOX = 0;     // Предыдущее положение мышки по оси X
         oldMouseOY = 0;     // Предыдущее положение мышки по оси Y
+
+        int MouseWheelDir = 0; // Направление колеса мыши
     }
 
     // Установка клавиш по умолчанию
@@ -157,7 +159,6 @@ namespace robbiespace
         currentMouseOY = y; // Запоминаем положение мышки по оси Y
     }
 
-
     // Функция для отслеживания пассивного движения мыши (без нажатия кнопки)
     // x - координата мыши по оси X
     // y - координата мыши по оси Y
@@ -170,6 +171,22 @@ namespace robbiespace
 
         currentMouseOX = x; // Запоминаем положение мышки по оси X
         currentMouseOY = y; // Запоминаем положение мышки по оси Y
+    }
+
+    // Получить направление вращения колеса мыши
+    int KeyHandler::GetDirectionMouseWheel()
+    {
+        if (MouseWheelDir > 0)
+        {
+            MouseWheelDir = 0;
+            return 1;
+        }
+        if (MouseWheelDir < 0)
+        {
+            MouseWheelDir = 0;
+            return -1;
+        }
+        return 0;
     }
 
     // Получить сдвиг мышки по оси X
