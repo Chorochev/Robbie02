@@ -21,8 +21,9 @@ namespace robbiespace
         WinMain();
         ~WinMain();
 
-        Camera camera = Camera(0.05f, 1.5); // камера вида
-        KeyHandler keyHandler;              // Обработка клавиш
+        Camera myCamera = Camera(0.05f, 1.5); // камера вида
+        CameraBase *camera;                   // Камера вида
+        KeyHandler keyHandler;                // Обработка клавиш
 
         // Создание окна
         void Create(World *world);

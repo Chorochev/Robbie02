@@ -11,7 +11,8 @@ namespace robbiespace
 
     WinMain::WinMain() : WinBase("Robbie", "main", 400, 400, 200, 200)
     {
-        winMainPoint = this;
+        winMainPoint = this;        
+        camera = &myCamera;
     }
 
     WinMain::~WinMain()
@@ -33,17 +34,17 @@ namespace robbiespace
         // обнуление трансформации
         glLoadIdentity();
         // установка камеры
-        camera.LookAt();
+        camera->LookAt();
 
-        glPushMatrix();
-        //worldScena->Floor();
+        glPushMatrix();        
+        //worldScena->Floor();        
         worldScena->FloorCells(8, 8);
         worldScena->Walls();
         glPopMatrix();
 
         glPushMatrix();
         globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 1, GetMessageForConsole());
-        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 2, camera.GetMessageForConsole());        
+        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 2, camera->GetMessageForConsole());        
         globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 3, keyHandler.GetMessageForConsole());        
         glPopMatrix();
         // Переключение буферов
@@ -78,9 +79,9 @@ namespace robbiespace
 
     // Основной таймер
     void WinMain::MainTimer(int value)
-    {
+    {        
         glutSetWindow(idWindow);    
-        camera.HandlerKeyPressed(&keyHandler);        
+        camera->HandlerKeyPressed(&keyHandler);        
         glutPostRedisplay();
 
         if (keyHandler.IsKeyPress(eKeys::Exit))
