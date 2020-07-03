@@ -21,7 +21,9 @@ namespace robbiespace
         KEY_LEFT,  // Стрелка влево
         KEY_UP,    // Стрелка вверх
         KEY_RIGHT, // Стрелка вправо
-        KEY_DOWN   // Стрелка вниз
+        KEY_DOWN,  // Стрелка вниз
+        PAGE_UP,   // Вверх
+        PAGE_DOWN  // Вниз
     };
 
     // Типы устройств

@@ -35,24 +35,22 @@ namespace robbiespace
     void CameraGlut::HandlerKeyPressed(KeyHandler *keyHandler)
     {
         if (keyHandler->IsKeyPress(eKeys::KEY_UP))
-        {
             MoveZ(speedMove);
-        }
 
         if (keyHandler->IsKeyPress(eKeys::KEY_DOWN))
-        {
             MoveZ(-speedMove);
-        }
 
         if (keyHandler->IsKeyPress(eKeys::KEY_LEFT))
-        {
             MoveX(speedMove);
-        }
 
         if (keyHandler->IsKeyPress(eKeys::KEY_RIGHT))
-        {
             MoveX(-speedMove);
-        }
+
+        if (keyHandler->IsKeyPress(eKeys::PAGE_UP))
+            MoveY(speedMove);
+
+        if (keyHandler->IsKeyPress(eKeys::PAGE_DOWN))
+            MoveY(-speedMove);
     }
 
     // Сообщение для консоли

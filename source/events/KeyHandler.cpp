@@ -20,6 +20,8 @@ namespace robbiespace
         keys[3] = {"iKeyUP", "UP", GLUT_KEY_UP, eKeys::KEY_UP, eDeviceKey::KeyboardSpec, false, 0, 0};
         keys[4] = {"iKeyRIGHT", "RIGHT", GLUT_KEY_RIGHT, eKeys::KEY_RIGHT, eDeviceKey::KeyboardSpec, false, 0, 0};
         keys[5] = {"iKeyDOWN", "DOWN", GLUT_KEY_DOWN, eKeys::KEY_DOWN, eDeviceKey::KeyboardSpec, false, 0, 0};
+        keys[6] = {"iKeyPAGE_UP", "PAGE_UP", GLUT_KEY_PAGE_UP, eKeys::PAGE_UP, eDeviceKey::KeyboardSpec, false, 0, 0};
+        keys[7] = {"iKeyPAGE_DOWN", "PAGE_DOWN", GLUT_KEY_PAGE_DOWN, eKeys::PAGE_DOWN, eDeviceKey::KeyboardSpec, false, 0, 0};
 
         // Неопознанные клавиши
         unknownKeys[0] = {"iKeyUnknown1", "Unknown1", 0, eKeys::Unknown, eDeviceKey::Unknown, false, 0, 0};
