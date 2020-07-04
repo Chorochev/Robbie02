@@ -18,6 +18,9 @@ namespace robbiespace
         // shift_angel - Угол поворота камеры
         CameraGlut(float speed_move, double shift_angel);
 
+        // Установка настроек камеры по умолчанию
+        void SetPositionDefault();
+
         // установка камеры
         void LookAt();
 

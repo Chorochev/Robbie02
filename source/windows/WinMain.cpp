@@ -69,13 +69,13 @@ namespace robbiespace
         // используем матрицу проекции
         glMatrixMode(GL_PROJECTION);
         // Reset матрицы
-        glLoadIdentity();        
+        glLoadIdentity();
         // определяем окно просмотра
         glViewport(0, 0, width, height);
         // установить корректную перспективу.
-        gluPerspective(camera->Zoom, ratio, 0.1, 100.0);        
+        gluPerspective(camera->Zoom, ratio, 0.1, 100.0);
         // вернуться к модели
-        glMatrixMode(GL_MODELVIEW);        
+        glMatrixMode(GL_MODELVIEW);
     }
 
     // Основной таймер
@@ -91,16 +91,19 @@ namespace robbiespace
         if (keyHandler.IsKeyPress(eKeys::KEY_F2))
             camera = &cameraGlut; // Переключаемся на камеру glut
 
-        if (keyHandler.IsKeyPress(eKeys::Exit))
-            CloseWindow();
-
         int wheelDir = keyHandler.GetDirectionMouseWheel();
         int newZoom = camera->Zoom + wheelDir;
-        if (newZoom >= 1.0 && newZoom <= 45.0 && newZoom != camera->Zoom)
+        if (newZoom >= 1.0 && newZoom <= 90.0 && newZoom != camera->Zoom)
         {
             camera->Zoom = newZoom;
             ReshapeFunc(iWindowSizeWidth, iWindowSizeHeight);
         }
+
+        if (keyHandler.IsKeyPress(eKeys::KEY_F4))
+            camera->SetPositionDefault();
+
+        if (keyHandler.IsKeyPress(eKeys::Exit))
+            CloseWindow();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////

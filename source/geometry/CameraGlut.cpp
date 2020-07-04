@@ -1,3 +1,5 @@
+#include <sstream>
+#include <iostream>
 #include <GL/glut.h>
 #include <geometry/CameraGlut.h>
 
@@ -9,6 +11,15 @@ namespace robbiespace
     CameraGlut::CameraGlut(float speed_move, double shift_angel) : CameraBase(speed_move, shift_angel)
     {
         nameCamera = "CameraGlut";
+    }
+
+    // Установка настроек камеры по умолчанию
+    void CameraGlut::SetPositionDefault()
+    {
+        CameraBase::SetPositionDefault();
+        vecTranslate.X = 0.0f;
+        vecTranslate.Y = 0.0f;
+        vecTranslate.Z = 0.0f;
     }
 
     // установка камеры
@@ -46,17 +57,16 @@ namespace robbiespace
             MoveY(speedMove);
         // Обработка движения мышки
         TurnX(keyHandler->GetMouseShiftOY());
-        TurnY(keyHandler->GetMouseShiftOX());        
+        TurnY(keyHandler->GetMouseShiftOX());
     }
 
     // Сообщение для консоли
     string CameraGlut::GetMessageForConsole()
     {
-        strConsole = nameCamera;
-        strConsole += ": ";
-        strConsole += "zoom=[" + std::to_string(Zoom) + "] ";
-        strConsole += "angels=[" + std::to_string(currentAngelOX) + ";" + std::to_string(currentAngelOY) + ";" + std::to_string(currentAngelOZ) + "] ";
-        strConsole += "translate[" + std::to_string(vecTranslate.X) + ";" + std::to_string(vecTranslate.Y) + ";" + std::to_string(vecTranslate.Z) + "] ";
-        return strConsole;
+        string strConsole = CameraBase::GetMessageForConsole();
+        stringstream strMessage;
+        strMessage.precision(2);
+        strMessage << fixed << strConsole << "translate[" << vecTranslate.X << ";" << vecTranslate.Y << ";" << vecTranslate.Z << "] ";
+        return strMessage.str();      
     }
 } // namespace robbiespace

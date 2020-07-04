@@ -1,3 +1,5 @@
+#include <sstream>
+#include <iostream>
 #include <GL/glut.h>
 #include <geometry/CameraBase.h>
 #include <geometry/VectorHelper.h>
@@ -11,22 +13,34 @@ namespace robbiespace
     CameraBase::CameraBase(float speed_move, double shift_angel)
     {
         nameCamera = "CameraBase";
+        speedMove = speed_move;
+        shiftAngel = shift_angel;
+        SetPositionDefault();
+    }
+
+    // Установка настроек камеры по умолчанию
+    void CameraBase::SetPositionDefault()
+    {
         // Текущее положение камеры
+        currentEye.X = 0.0f;
         currentEye.Y = 0.25f;
+        currentEye.Z = -2.0f;
         // Текущая точка зрения камеры (куда камера смотрит)
+        currentCenter.X = 0.0f;
         currentCenter.Y = 0.25f;
-        currentCenter.Z = sizeVector;
+        currentCenter.Z = -2.0 + sizeVector;
         // Текущий угол поворота камеры
+        currentUp.X = 0.0f;
         currentUp.Y = 1.0f;
+        currentUp.Z = 0.0f;
         // Нормализованный вектор вращения
+        rotVector.X = 0.0f;
+        rotVector.Y = 0.0f;
         rotVector.Z = sizeVector;
         // Текущий угол камеры (0-360 гр.)
         currentAngelOX = 0.0; // Текущий угол камеры (0-360 гр.) по оси X
         currentAngelOY = 0.0; // Текущий угол камеры (0-360 гр.) по оси Y
         currentAngelOZ = 0.0; // Текущий угол камеры (0-360 гр.) по оси Z
-
-        speedMove = speed_move;
-        shiftAngel = shift_angel;
 
         Zoom = 45.0f; // Зум камеры
     }
@@ -36,33 +50,41 @@ namespace robbiespace
     // addAngel - добавочный угол
     double CameraBase::GetShiftAngel(double currentAngel, double addAngel)
     {
+        if (addAngel == 0.0)
+            return currentAngel;
+
+        double limitAngel = 3.0;
+        if (addAngel > limitAngel)
+            addAngel = limitAngel;
+        if (addAngel < -limitAngel)
+            addAngel = -limitAngel;
+
         double newAngel = currentAngel + addAngel;
 
-        if (newAngel >= 360.0)
-        {
+        if (newAngel >= 360.0)        
             currentAngel = newAngel - 360.0;
-        }
-        if (newAngel <= 0.0)
-        {
+        
+        if (newAngel <= 0.0)        
             currentAngel = 360.0 + newAngel;
-        }
-        if (newAngel > 0.0 && newAngel < 360.0)
-        {
+        
+        if (newAngel > 0.0 && newAngel < 360.0)        
             currentAngel = newAngel;
-        }
+       
         return currentAngel;
     }
 
     // Сообщение для консоли
     string CameraBase::GetMessageForConsole()
     {
-        strConsole = nameCamera;
-        strConsole += ": ";
-        strConsole += "zoom=[" + std::to_string(Zoom) + "] ";
-        strConsole += "angels=[" + std::to_string(currentAngelOX) + ";" + std::to_string(currentAngelOY) + ";" + std::to_string(currentAngelOZ) + "] ";
-        strConsole += "eye[" + std::to_string(currentEye.X) + ";" + std::to_string(currentEye.Y) + ";" + std::to_string(currentEye.Z) + "] ";
-        strConsole += "center[" + std::to_string(currentCenter.X) + ";" + std::to_string(currentCenter.Y) + ";" + std::to_string(currentCenter.Z) + "] ";
-        return strConsole;
+        stringstream strMessage;
+        strMessage.precision(2);
+        strMessage << fixed
+                   << nameCamera << ": "
+                   << "zoom=[" << Zoom << "] "
+                   << "angels=[" << currentAngelOX << ";" << currentAngelOY << ";" << currentAngelOZ << "] "
+                   << "eye[" << currentEye.X << ";" << currentEye.Y << ";" << currentEye.Z << "] "
+                   << "center[" << currentCenter.X << ";" << currentCenter.Y << ";" << currentCenter.Z << "] ";
+        return strMessage.str();
     }
 
 } // namespace robbiespace

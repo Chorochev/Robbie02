@@ -12,8 +12,8 @@ namespace robbiespace
     class CameraBase
     {
     protected:
-        string nameCamera;       // Наименование камеры
-        string strConsole;       // Строка для консоли
+        string nameCamera; // Наименование камеры
+
         RobVector currentEye;    // Текущее положение камеры
         RobVector currentCenter; // Текущая точка зрения камеры (куда камера смотрит)
         RobVector currentUp;     // Текущий угол поворота камеры
@@ -39,6 +39,9 @@ namespace robbiespace
         CameraBase(float speed_move, double shift_angel);
 
         double Zoom; // Зум камеры
+
+        // Установка настроек камеры по умолчанию
+        virtual void SetPositionDefault();
 
         // Установка скорости перемещения камеры
         // speed_move - Скорость движения камеры
