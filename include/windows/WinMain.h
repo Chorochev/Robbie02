@@ -2,7 +2,7 @@
 #ifndef PROJECT_WINDOWS_WINMAIN_H
 #define PROJECT_WINDOWS_WINMAIN_H
 
-#define DELAY_FOR_TIMER_WINMAIN 30 
+#define DELAY_FOR_TIMER_WINMAIN 30
 
 #include <string>
 
@@ -20,12 +20,18 @@ namespace robbiespace
     private:
         World *worldScena; // Указатель на класс для сцены
 
+        int timeFPS;     // текущее число миллисекунд
+        int frameFPS;    //  количество кадров в секунду
+        int timebaseFPS; // время, когда мы в последний раз вычислили частоту кадров.
+        float FPS;       // FPS
+
+        void countFPS(); // Счетчик FPS
+
     public:
         WinMain();
-        ~WinMain();
 
-        CameraCustom cameraCustom = CameraCustom(0.05f, 1.5); // камера вида
-        CameraGlut cameraGlut = CameraGlut(0.05f, 1.5);       // камера вида
+        CameraCustom cameraCustom = CameraCustom(0.07f, 1.5); // камера вида
+        CameraGlut cameraGlut = CameraGlut(0.07f, 1.5);       // камера вида
         CameraBase *camera;                                   // Камера вида
         KeyHandler keyHandler;                                // Обработка клавиш
 

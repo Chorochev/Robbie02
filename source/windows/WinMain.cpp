@@ -1,3 +1,5 @@
+#include <sstream>
+#include <iostream>
 #include <GL/glut.h>
 #include <GL/freeglut.h>
 #include <windows/WinMain.h>
@@ -14,21 +16,39 @@ namespace robbiespace
         winMainPoint = this;
         camera = &cameraCustom;
         //camera = &cameraGlut;
+        timeFPS = 0;     // текущее число миллисекунд
+        frameFPS = 0;    //  количество кадров в секунду
+        timebaseFPS = 0; // время, когда мы в последний раз вычислили частоту кадров.
+        FPS = 0;         // FPS
     }
-
-    WinMain::~WinMain()
+    // Счетчик FPS
+    void WinMain::countFPS()
     {
+        // Код для вычисления кадров в секунду
+        frameFPS++;
+        timeFPS = glutGet(GLUT_ELAPSED_TIME);
+        if (timeFPS - timebaseFPS > 1000)
+        {
+            //sprintf(strFPS, "FPS:%4.2f", frameFPS * 1000.0 / (timeFPS - timebaseFPS));
+            FPS = (float)frameFPS * 1000.0f / (float)(timeFPS - timebaseFPS);
+            timebaseFPS = timeFPS;
+            frameFPS = 0;
+        }
     }
 
     // Сообщение для консоли
     string WinMain::GetMessageForConsole()
     {
-        return "Screen[" + std::to_string(iWindowSizeWidth) + ":" + std::to_string(iWindowSizeHeight) + "]";
+        stringstream strMessage;
+        strMessage.precision(2);
+        strMessage << fixed << "Screen[" << iWindowSizeWidth << ":" << iWindowSizeHeight << "] " << "FPS " << FPS;
+        return strMessage.str();      
     }
 
     // Функция рисования
     void WinMain::DisplayFunc()
     {
+        countFPS();
         glutSetWindow(idWindow);
         // очистка буфера цвета и глубины
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

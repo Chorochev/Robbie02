@@ -61,15 +61,15 @@ namespace robbiespace
 
         double newAngel = currentAngel + addAngel;
 
-        if (newAngel >= 360.0)        
+        if (newAngel >= 360.0)
             currentAngel = newAngel - 360.0;
-        
-        if (newAngel <= 0.0)        
+
+        if (newAngel <= 0.0)
             currentAngel = 360.0 + newAngel;
-        
-        if (newAngel > 0.0 && newAngel < 360.0)        
+
+        if (newAngel > 0.0 && newAngel < 360.0)
             currentAngel = newAngel;
-       
+
         return currentAngel;
     }
 
@@ -80,6 +80,7 @@ namespace robbiespace
         strMessage.precision(2);
         strMessage << fixed
                    << nameCamera << ": "
+                   << "speedMove=[" << speedMove << "] "
                    << "zoom=[" << Zoom << "] "
                    << "angels=[" << currentAngelOX << ";" << currentAngelOY << ";" << currentAngelOZ << "] "
                    << "eye[" << currentEye.X << ";" << currentEye.Y << ";" << currentEye.Z << "] "
