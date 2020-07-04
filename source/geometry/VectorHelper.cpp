@@ -23,4 +23,20 @@ namespace robbiespace
         return newVector;
     }
 
+    // Проверка нахождения точки в границах нормализованного куба. По умолчанию размер куба от -1 до 1;
+    // pVec - координаты точки для проверки
+    // size - Размер от 0 до стены куба по оси
+    bool VectorHelper::IsInNormalRoom(RobVector pVec, float size)
+    {
+        if(pVec.X > size) return false;
+        if(pVec.Y > size) return false;
+        if(pVec.Z > size) return false;
+
+        if(pVec.X < -size) return false;
+        if(pVec.Y < -size) return false;
+        if(pVec.Z < -size) return false;
+
+        return true;
+    }
+
 } // namespace robbiespace

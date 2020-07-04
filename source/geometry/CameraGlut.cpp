@@ -34,6 +34,39 @@ namespace robbiespace
         gluLookAt(currentEye.X, currentEye.Y, currentEye.Z, currentCenter.X, currentCenter.Y, currentCenter.Z, currentUp.X, currentUp.Y, currentUp.Z);
     }
 
+    // Сдвинуть камеру вперед или назад по оси X
+    // step - размер сдвига камеры
+    void CameraGlut::MoveX(float step)
+    {
+        if (step > 0.0f && ((vecTranslate.X + step) > limit))
+            return;
+        if (step < 0.0f && ((vecTranslate.X + step) < -limit))
+            return;
+        vecTranslate.X += step;
+    };
+
+    // Сдвинуть камеру вперед или назад по оси Y
+    // step - размер сдвига камеры
+    void CameraGlut::MoveY(float step)
+    {
+        if (step > 0.0f && ((vecTranslate.Y + step) > limit))
+            return;
+        if (step < 0.0f && ((vecTranslate.Y + step) < -limit))
+            return;
+        vecTranslate.Y += step;
+    };
+
+    // Сдвинуть камеру вперед или назад по оси Z
+    // step - размер сдвига камеры
+    void CameraGlut::MoveZ(float step)
+    {
+        if (step > 0.0f && ((vecTranslate.Z + step) > limit))
+            return;
+        if (step < 0.0f && ((vecTranslate.Z + step) < -limit))
+            return;
+        vecTranslate.Z += step;
+    };
+
     // Обработка клавиш
     // keyHandler - указатель на обработчик клавиш
     void CameraGlut::HandlerKeyPressed(KeyHandler *keyHandler)
@@ -67,6 +100,6 @@ namespace robbiespace
         stringstream strMessage;
         strMessage.precision(2);
         strMessage << fixed << strConsole << "translate[" << vecTranslate.X << ";" << vecTranslate.Y << ";" << vecTranslate.Z << "] ";
-        return strMessage.str();      
+        return strMessage.str();
     }
 } // namespace robbiespace

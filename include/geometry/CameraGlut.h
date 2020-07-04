@@ -11,6 +11,7 @@ namespace robbiespace
     {
     private:
         RobVector vecTranslate;
+        const float limit = 2.0f;
 
     public:
         // Инициализация камеры
@@ -26,15 +27,15 @@ namespace robbiespace
 
         // Сдвинуть камеру вперед или назад по оси X
         // step - размер сдвига камеры
-        inline void MoveX(float step) { vecTranslate.X += step; };
+        void MoveX(float step);
 
         // Сдвинуть камеру вперед или назад по оси Y
         // step - размер сдвига камеры
-        inline void MoveY(float step) { vecTranslate.Y += step; };
+        void MoveY(float step);
 
         // Сдвинуть камеру вперед или назад по оси Z
         // step - размер сдвига камеры
-        inline void MoveZ(float step) { vecTranslate.Z += step; };
+        void MoveZ(float step);
 
         // Обработка клавиш
         // keyHandler - указатель на обработчик клавиш

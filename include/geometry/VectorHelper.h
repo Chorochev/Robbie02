@@ -27,6 +27,11 @@ namespace robbiespace
         // Получение синуса угла
         // angle - угол 0 - 360 град.
         inline double GetSin(double angle) { return sin(angle * (PI / 180.0)); }
+
+        // Проверка нахождения точки в границах нормализованного куба. По умолчанию размер куба от -1 до 1;
+        // pVec - координаты точки для проверки
+        // size - Размер от 0 до стены куба по оси
+        bool IsInNormalRoom(RobVector pVec, float size = 1.0f);
     };
 
     extern VectorHelper globalVectorHelper;

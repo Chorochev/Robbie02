@@ -30,8 +30,12 @@ namespace robbiespace
         // Находим вектор сдвига
         RobVector shiftVec = addVec - normVec;
         // Сдвигаем вектора положения камеры и направление вида на вектор сдвига
-        currentEye = currentEye + shiftVec;
-        currentCenter = currentCenter + shiftVec;
+        RobVector newCurrentEye = currentEye + shiftVec;
+        if (globalVectorHelper.IsInNormalRoom(newCurrentEye, 2.0f))
+        {
+            currentEye = newCurrentEye; 
+            currentCenter = currentCenter + shiftVec;
+        }
     }
 
     // Повернуть камеру вокруг оси Y
