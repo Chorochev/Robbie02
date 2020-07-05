@@ -209,6 +209,8 @@ namespace robbiespace
 
         // Включаем отсечение. *включать нужно после создания окна.
         glEnable(GL_DEPTH_TEST);
+        // Отсечение прорисовки внутренней стороны полигона (со спины)
+        glEnable(GL_CULL_FACE);
 
         glutDisplayFunc(DisplayFuncForWinMain);             // Установка функции для рисования
         glutReshapeFunc(ReshapeFuncForWinMain);             // Установка функции в случае изменения размеров окна

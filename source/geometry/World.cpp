@@ -24,8 +24,8 @@ namespace robbiespace
     void World::FloorCells(int rows, int columns)
     {
         bool changeColor = false;
-        float color1[3] = {0.6f, 0.6f, 0.6f};
-        float color2[3] = {0.1f, 0.1f, 0.1f};
+        float color1[3] = {0.5f, 0.5f, 0.5f};
+        float color2[3] = {0.3f, 0.3f, 0.3f};
 
         float sizeRow = 2.0f / ((float)rows);
         float sizeColumn = 2.0f / ((float)columns);
@@ -63,11 +63,12 @@ namespace robbiespace
 
     // Стены
     void World::Walls()
-    {
-        glColor3f(0.1f, 0.4f, 0.1f);
+    {        
         glBegin(GL_POLYGON);
+        glColor3f(0.0f, 0.3f, 0.0f);
         glVertex3f(-1.0f, 0.0f, 1.0f);
         glVertex3f(-1.0f, 1.0f, 1.0f);
+        glColor3f(0.0f, 0.0f, 0.3f);
         glVertex3f(1.0f, 1.0f, 1.0f);
         glVertex3f(1.0f, 0.0f, 1.0f);
         glEnd();
