@@ -1,5 +1,4 @@
 #include <sstream>
-#include <iostream>
 #include <GL/glut.h>
 #include <geometry/CameraBase.h>
 #include <geometry/VectorHelper.h>

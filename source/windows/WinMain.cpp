@@ -1,9 +1,9 @@
 #include <sstream>
-#include <iostream>
 #include <GL/glut.h>
 #include <GL/freeglut.h>
 #include <windows/WinMain.h>
 #include <system/PrintTextHelper.h>
+#include <system/GlErrors.h>
 
 namespace robbiespace
 {
@@ -66,7 +66,8 @@ namespace robbiespace
         glPushMatrix();
         globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 1, GetMessageForConsole());
         globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 2, camera->GetMessageForConsole());
-        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 3, keyHandler.GetMessageForConsole());
+        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 3, globalGlErrors.GetMessageForConsole());
+        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 4, keyHandler.GetMessageForConsole());        
         glPopMatrix();
         // Переключение буферов
         glutSwapBuffers();
@@ -101,6 +102,8 @@ namespace robbiespace
     // Основной таймер
     void WinMain::MainTimer(int value)
     {
+        globalGlErrors.ErrorsHandler();
+
         glutSetWindow(idWindow);
         camera->HandlerKeyPressed(&keyHandler);
         glutPostRedisplay();
