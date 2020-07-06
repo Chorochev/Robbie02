@@ -41,8 +41,9 @@ namespace robbiespace
     {
         stringstream strMessage;
         strMessage.precision(2);
-        strMessage << fixed << "Screen[" << iWindowSizeWidth << ":" << iWindowSizeHeight << "] " << "FPS " << FPS;
-        return strMessage.str();      
+        strMessage << fixed << "Screen[" << iWindowSizeWidth << ":" << iWindowSizeHeight << "] "
+                   << "FPS " << FPS;
+        return strMessage.str();
     }
 
     // Функция рисования
@@ -59,15 +60,16 @@ namespace robbiespace
 
         glPushMatrix();
         //worldScena->Floor();
-        worldScena->FloorCells(8, 8);
-        worldScena->Walls();
+        //worldScena->FloorCells(8, 8);
+        //worldScena->Walls();
+        worldScena->WorldScena();
         glPopMatrix();
 
         glPushMatrix();
         globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 1, GetMessageForConsole());
         globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 2, camera->GetMessageForConsole());
         globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 3, globalGlErrors.GetMessageForConsole());
-        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 4, keyHandler.GetMessageForConsole());        
+        globalPrintTextHelper.PrintTextOnDisplay(iWindowSizeWidth, iWindowSizeHeight, 4, keyHandler.GetMessageForConsole());
         glPopMatrix();
         // Переключение буферов
         glutSwapBuffers();

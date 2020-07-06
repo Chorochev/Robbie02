@@ -7,6 +7,13 @@ namespace robbiespace
     {
     }
 
+    // Создание всех объектов сцены
+    void World::CreateScena()
+    {        
+        BoxObj box1 = BoxObj(1);
+        listObjs.push_back(box1);       
+    }
+
     void World::Floor()
     {
         glColor3f(0.4f, 0.4f, 0.4f);
@@ -63,7 +70,7 @@ namespace robbiespace
 
     // Стены
     void World::Walls()
-    {        
+    {
         glBegin(GL_POLYGON);
         glColor3f(0.0f, 0.3f, 0.0f);
         glVertex3f(-1.0f, 0.0f, 1.0f);
@@ -72,6 +79,22 @@ namespace robbiespace
         glVertex3f(1.0f, 1.0f, 1.0f);
         glVertex3f(1.0f, 0.0f, 1.0f);
         glEnd();
+    }
+
+    // Прорисовка всей сцены
+    void World::WorldScena()
+    {
+        FloorCells(8, 8);
+        Walls();
+
+        list<BoxObj>::iterator ob = listObjs.begin();
+        while (ob != listObjs.end())
+        {
+            int tt = ob->GetID();
+            const char *n = ob->GetName().c_str();
+            ob->Display();
+            ob++;
+        }
     }
 
 } // namespace robbiespace

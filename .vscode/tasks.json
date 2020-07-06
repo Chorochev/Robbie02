@@ -11,6 +11,7 @@
                 "${workspaceRoot}/source/*.cpp",
                 "${workspaceRoot}/source/events/*.cpp",
                 "${workspaceRoot}/source/geometry/*.cpp",  
+                "${workspaceRoot}/source/objects/*.cpp",  
                 "${workspaceRoot}/source/system/*.cpp",
                 "${workspaceRoot}/source/windows/*.cpp",                              
                 "-o",

@@ -3,21 +3,19 @@
 #define PROJECT_OBJECTS_BOXOBJ_H
 
 #include <objects/BaseObj.h>
-//#include <geometry/RobVector.h>
 
 namespace robbiespace
 {
     class BoxObj : public BaseObj
     {
     private:
-        /* data */
     public:
         // Коструктор коробки
         // id - идентификатор объекта
         BoxObj(int id);
 
         // Вывод объекта на экран
-        virtual void Display();
+        void Display();
     };
 
 } // namespace robbiespace

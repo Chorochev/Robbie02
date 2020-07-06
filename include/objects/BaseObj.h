@@ -29,9 +29,6 @@ namespace robbiespace
 
         // Получение имени объекта
         inline string GetName() { return _name; };
-
-        // Вывод объекта на экран
-        virtual void Display() = 0; 
     };
 
 } // namespace robbiespace
