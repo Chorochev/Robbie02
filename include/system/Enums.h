@@ -39,5 +39,16 @@ namespace robbiespace
         Mouse         // Мышка
     };
 
+    // Стороны прямоугольного объекта
+    enum class eSideBoxObj
+    {
+        Front, // Передняя сторона
+        Back,  // Задняя сторона
+        Left,  // левая сторона
+        Right, // Правая сторона
+        Top,   // Верхняя сторона
+        Bottom // Нижняя сторона
+    };
+
 } // namespace robbiespace
 #endif
