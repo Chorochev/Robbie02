@@ -117,8 +117,8 @@ namespace robbiespace
             camera = &cameraGlut; // Переключаемся на камеру glut
 
         int wheelDir = keyHandler.GetDirectionMouseWheel();
-        int newZoom = camera->Zoom + wheelDir;
-        if (newZoom >= 1.0 && newZoom <= 90.0 && newZoom != camera->Zoom)
+        int newZoom = camera->Zoom + (5 * wheelDir);
+        if (newZoom >= 5 && newZoom <= 120 && newZoom != camera->Zoom)
         {
             camera->Zoom = newZoom;
             ReshapeFunc(iWindowSizeWidth, iWindowSizeHeight);
