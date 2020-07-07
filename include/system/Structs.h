@@ -24,7 +24,8 @@ namespace robbiespace
     // Структура описывающая одну сторону прямоугольного объекта
     struct structSideBox
     {
-        eSideBoxObj sideBox; // Тип стороны
+        eSideBoxObj SideBox; // Тип стороны
+        RobVector Color;     // Цвет стороны
         RobVector Point1;    // Первая точка строны
         RobVector Point2;    // Вторая точка стороны
         RobVector Point3;    // Третья точка стороны
