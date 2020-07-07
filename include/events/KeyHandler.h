@@ -5,24 +5,10 @@
 #define SIZE_STRUCTKEY_ARRAY 12
 #define SIZE_UNKNOWN_STRUCTKEY_ARRAY 3
 
-#include <string>
-#include <system/Enums.h>
+#include <system/Structs.h>
 
 namespace robbiespace
 {
-    // Структура для клавиши
-    struct StructKey
-    {
-        std::string Name;      // Имя клавиши
-        std::string Code;      // Код клавиши
-        int Value;             // Значение клавиши
-        eKeys TypeKey;         // Тип клавиши
-        eDeviceKey TypeDevice; // Тип устройства
-        bool IsPress;          // Признак нажатия клавиши
-        int MouseX;            // координата мыши по оси X
-        int MouseY;            // координата мыши по оси Y
-    };
-
     // Класс для обработки клавиш
     class KeyHandler
     {
