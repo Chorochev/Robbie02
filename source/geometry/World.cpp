@@ -9,9 +9,14 @@ namespace robbiespace
 
     // Создание всех объектов сцены
     void World::CreateScena()
-    {        
+    {
         BoxObj box1 = BoxObj(1);
-        listObjs.push_back(box1);       
+        box1.SetDefault();
+        box1.ChangeSize(0.2f, 0.14f, 0.25f);
+        box1.position.X = 0.2f;
+        box1.position.Y = 0.4f;
+        box1.position.Z = 0.3f;
+        listObjs.push_back(box1);
     }
 
     void World::Floor()

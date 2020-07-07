@@ -15,14 +15,13 @@ namespace robbiespace
     private:
         int _baseID;  // Идентификатор объекта
         string _name; // Имя объекта
-    protected:
-        RobVector position; // Координаты объекта
-
     public:
         // Базовый конструктор объекта
         // id - идентификатор объекта
         // name - имя объекта
         BaseObj(int id, string name);
+
+        RobVector position; // Координаты объекта
 
         // Получение идентификатора объекта
         inline int GetID() { return _baseID; };

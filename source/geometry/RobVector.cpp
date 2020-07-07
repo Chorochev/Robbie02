@@ -15,6 +15,15 @@ namespace robbiespace
         Z = z;
     }
 
+    // Установка вектора
+    // vec - массив где: X-vec[0], Y-vec[1], Z-vec[2]
+    void RobVector::SetValue(float vec[3])
+    {
+        X = vec[0];
+        Y = vec[1];
+        Z = vec[2];
+    }
+
     // Перегрузка оператора сложения "+"
     RobVector RobVector::operator+(RobVector op2)
     {

@@ -14,6 +14,10 @@ namespace robbiespace
         RobVector();
         RobVector(float x, float y, float z);
 
+        // Установка вектора
+        // vec - массив где: X-vec[0], Y-vec[1], Z-vec[2]
+        void SetValue(float vec[3]);
+
         // Перегрузка оператора сложения "+"
         RobVector operator+(RobVector op2);
 

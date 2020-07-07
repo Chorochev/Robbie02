@@ -8,4 +8,5 @@ namespace robbiespace
     {
         curentObjID = 1;
     }
-}
+
+} // namespace robbiespace
