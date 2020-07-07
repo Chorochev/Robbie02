@@ -10,6 +10,12 @@ namespace robbiespace
 
     RobVector::RobVector(float x, float y, float z)
     {
+        SetValue(x, y, z);
+    }
+
+    // Установка вектора
+    void RobVector::SetValue(float x, float y, float z)
+    {
         X = x;
         Y = y;
         Z = z;

@@ -1,5 +1,6 @@
 #include <GL/glut.h>
 #include <geometry/World.h>
+#include <objects/ObjHelper.h>
 
 namespace robbiespace
 {
@@ -13,10 +14,12 @@ namespace robbiespace
         BoxObj box1 = BoxObj(1);
         box1.SetDefault();
         box1.ChangeSize(0.2f, 0.14f, 0.25f);
-        box1.position.X = 0.2f;
-        box1.position.Y = 0.4f;
-        box1.position.Z = 0.3f;
+        box1.position.SetValue(0.2f, 0.4f, 0.3f);
         listObjs.push_back(box1);
+
+        BoxObj box2 = BoxObj(2);
+        globalObjHelper.GetWall(eSideBoxObj::Back, &box2);
+        listObjs.push_back(box2);
     }
 
     void World::Floor()
@@ -90,7 +93,7 @@ namespace robbiespace
     void World::WorldScena()
     {
         FloorCells(8, 8);
-        Walls();
+        // Walls();
 
         list<BoxObj>::iterator ob = listObjs.begin();
         while (ob != listObjs.end())
