@@ -1,11 +1,18 @@
+#include <iostream>
+#include <fstream>
+#include <filesystem>
 #include <GL/glut.h>
 #include <geometry/World.h>
 #include <objects/ObjHelper.h>
+
+//#define NAMEDIRFORSCENE "scena"
 
 namespace robbiespace
 {
     World::World()
     {
+        isQuickSaveScena = false; // Признак сохранения сцены
+        isQuickLoadScena = false; // Признак загрузки сцены
     }
 
     // Создание всех объектов сцены
@@ -107,6 +114,43 @@ namespace robbiespace
             ob->Display();
             glPopMatrix();
             ob++;
+        }
+    }
+
+    // Сохранение сцены
+    // Имя для сохранения сцены
+    void World::SaveScena(string name)
+    {
+        if (std::filesystem::exists("scena") == 0)
+        {
+            std::filesystem::create_directory("scena");
+        }
+        string _path = "scena/" + name + ".scene";
+        ofstream out;
+        out.open(_path, ios::app);
+        if (!out)
+        {
+            return;
+        }
+        out << "Test" << std::endl;
+        out.close();
+    }
+
+    // Обработка клавиш
+    // keyHandler - указатель на обработчик клавиш
+    void World::HandlerKeyPressed(KeyHandler *keyHandler)
+    {
+        if (keyHandler->IsKeyPress(eKeys::QUICK_SAVE_SCENA))
+        {
+            if (!isQuickSaveScena)
+            {
+                SaveScena("quickSaveScena");
+                isQuickSaveScena = true;
+            }
+        }
+        else
+        {
+            isQuickSaveScena = false;
         }
     }
 

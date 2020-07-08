@@ -16,18 +16,20 @@ namespace robbiespace
     // Типы клавиш
     enum class eKeys
     {
-        Unknown,   // нет нажатых клавиш
-        Exit,      // кнопка выхода
-        KEY_LEFT,  // Стрелка влево
-        KEY_UP,    // Стрелка вверх
-        KEY_RIGHT, // Стрелка вправо
-        KEY_DOWN,  // Стрелка вниз
-        PAGE_UP,   // Вверх
-        PAGE_DOWN, // Вниз
-        KEY_F1,    // F1
-        KEY_F2,    // F2
-        KEY_F3,    // F3
-        KEY_F4     // F4
+        Unknown,          // нет нажатых клавиш
+        Exit,             // кнопка выхода
+        KEY_LEFT,         // Стрелка влево
+        KEY_UP,           // Стрелка вверх
+        KEY_RIGHT,        // Стрелка вправо
+        KEY_DOWN,         // Стрелка вниз
+        PAGE_UP,          // Вверх
+        PAGE_DOWN,        // Вниз
+        KEY_F1,           // F1
+        KEY_F2,           // F2
+        KEY_F3,           // F3
+        KEY_F4,           // F4
+        QUICK_SAVE_SCENA, // Быстрое сохранение сцены
+        QUICK_LOAD_SCENA  // Быстрая загрузка сцены
     };
 
     // Типы устройств

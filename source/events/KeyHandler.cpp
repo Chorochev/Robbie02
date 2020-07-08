@@ -34,6 +34,8 @@ namespace robbiespace
         keys[9] = {"iKeyKEY_F2", "KEY_F2", GLUT_KEY_F2, eKeys::KEY_F2, eDeviceKey::KeyboardSpec, false, 0, 0};
         keys[10] = {"iKeyKEY_F3", "KEY_F3", GLUT_KEY_F3, eKeys::KEY_F3, eDeviceKey::KeyboardSpec, false, 0, 0};
         keys[11] = {"iKeyKEY_F4", "KEY_F4", GLUT_KEY_F4, eKeys::KEY_F4, eDeviceKey::KeyboardSpec, false, 0, 0};
+        keys[12] = {"iKeyQuickSaveScena", "QSaveScena", GLUT_KEY_F5, eKeys::QUICK_SAVE_SCENA, eDeviceKey::KeyboardSpec, false, 0, 0};
+        keys[13] = {"iKeyQuickLoadScena", "QLoadScena", GLUT_KEY_F9, eKeys::QUICK_LOAD_SCENA, eDeviceKey::KeyboardSpec, false, 0, 0};
 
         // Неопознанные клавиши
         unknownKeys[0] = {"iKeyUnknown1", "Unknown1", 0, eKeys::Unknown, eDeviceKey::Unknown, false, 0, 0};

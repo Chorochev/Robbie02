@@ -3,7 +3,9 @@
 #define PROJECT_GEOMETRY_WORLD_H
 
 #include <list>
+#include <string>
 #include <objects/BoxObj.h>
+#include <events/KeyHandler.h>
 
 using namespace std;
 
@@ -13,7 +15,8 @@ namespace robbiespace
     {
     private:
         list<BoxObj> listObjs;
-
+        bool isQuickSaveScena; // Признак сохранения сцены
+        bool isQuickLoadScena; // Признак загрузки сцены
     public:
         World();
 
@@ -30,6 +33,14 @@ namespace robbiespace
 
         // Прорисовка всей сцены
         void WorldScena();
+
+        // Сохранение сцены
+        // Имя для сохранения сцены
+        void SaveScena(string name);
+
+        // Обработка клавиш
+        // keyHandler - указатель на обработчик клавиш
+        void HandlerKeyPressed(KeyHandler *keyHandler);
     };
 
 } // namespace robbiespace

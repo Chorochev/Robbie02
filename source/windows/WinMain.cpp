@@ -107,8 +107,10 @@ namespace robbiespace
         globalGlErrors.ErrorsHandler();
 
         glutSetWindow(idWindow);
+
         camera->HandlerKeyPressed(&keyHandler);
-        glutPostRedisplay();
+
+        worldScena->HandlerKeyPressed(&keyHandler);
 
         if (keyHandler.IsKeyPress(eKeys::KEY_F1))
             camera = &cameraCustom; // Переключаемся на ручную камеру
@@ -125,10 +127,12 @@ namespace robbiespace
         }
 
         if (keyHandler.IsKeyPress(eKeys::KEY_F4))
-            camera->SetPositionDefault();
-
+            camera->SetPositionDefault();            
+        
         if (keyHandler.IsKeyPress(eKeys::Exit))
             CloseWindow();
+
+        glutPostRedisplay();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
