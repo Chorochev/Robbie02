@@ -121,18 +121,27 @@ namespace robbiespace
     // Имя для сохранения сцены
     void World::SaveScena(string name)
     {
-        if (std::filesystem::exists("scena") == 0)
+        if (filesystem::exists("scena") == 0)
         {
-            std::filesystem::create_directory("scena");
+            filesystem::create_directory("scena");
         }
         string _path = "scena/" + name + ".scene";
         ofstream out;
-        out.open(_path, ios::app);
+        out.open(_path); //, ios::app);
         if (!out)
         {
             return;
         }
-        out << "Test" << std::endl;
+        out.precision(16);
+        //out << "Test" << std::endl;
+        list<BoxObj>::iterator ob = listObjs.begin();
+        while (ob != listObjs.end())
+        {
+            out << "type" << " " << "BoxObj" << ob->GetName() << std::endl;
+            out << "id" << " " << ob->GetID() << " " << "name" << ob->GetName() << std::endl;
+            ob->SaveToSteam(out);
+            ob++;
+        }
         out.close();
     }
 

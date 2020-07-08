@@ -127,12 +127,16 @@ namespace robbiespace
         }
 
         if (keyHandler.IsKeyPress(eKeys::KEY_F4))
-            camera->SetPositionDefault();            
+            camera->SetPositionDefault();
         
         if (keyHandler.IsKeyPress(eKeys::Exit))
+        {
             CloseWindow();
-
-        glutPostRedisplay();
+        }
+        else
+        {
+            glutPostRedisplay();
+        }
     }
 
     /////////////////////////////////////////////////////////////////////////////////////

@@ -54,4 +54,19 @@ namespace robbiespace
         }
     }
 
+    // Сохранение объекта в поток
+    void BoxObj::SaveToSteam(ofstream &out)
+    {        
+        for (size_t i = 0; i < 6; i++)
+        {
+            //unsigned int valSideBox = Sides[i].SideBox;
+            out << "SideBox" << " " << ((int)Sides[i].SideBox) << std::endl;
+            out << "Color" << " " << Sides[i].Color.X << " " << Sides[i].Color.Y << " " << Sides[i].Color.Z << std::endl;
+            out << "Point1" << " " << Sides[i].Point1.X << " " << Sides[i].Point1.Y << " " << Sides[i].Point1.Z << std::endl;
+            out << "Point2" << " " << Sides[i].Point2.X << " " << Sides[i].Point2.Y << " " << Sides[i].Point2.Z << std::endl;
+            out << "Point3" << " " << Sides[i].Point3.X << " " << Sides[i].Point3.Y << " " << Sides[i].Point3.Z << std::endl;
+            out << "Point4" << " " << Sides[i].Point4.X << " " << Sides[i].Point4.Y << " " << Sides[i].Point4.Z << std::endl;
+        }
+    }
+
 } // namespace robbiespace

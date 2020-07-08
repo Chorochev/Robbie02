@@ -2,6 +2,8 @@
 #ifndef PROJECT_OBJECTS_BOXOBJ_H
 #define PROJECT_OBJECTS_BOXOBJ_H
 
+#include <iostream>
+#include <fstream>
 #include <system/Structs.h>
 #include <objects/BaseObj.h>
 
@@ -29,6 +31,9 @@ namespace robbiespace
 
         // Вывод объекта на экран
         void Display();
+
+        // Сохранение объекта в поток
+        void SaveToSteam(ofstream &out);
     };
 
 } // namespace robbiespace

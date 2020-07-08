@@ -42,9 +42,9 @@ namespace robbiespace
     };
 
     // Стороны прямоугольного объекта
-    enum class eSideBoxObj
+    enum eSideBoxObj
     {
-        Front, // Передняя сторона
+        Front = 0, // Передняя сторона
         Back,  // Задняя сторона
         Left,  // левая сторона
         Right, // Правая сторона
