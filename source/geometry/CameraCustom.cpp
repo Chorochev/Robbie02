@@ -83,9 +83,9 @@ namespace robbiespace
     // Установка вида паралельно земли
     void CameraCustom::CenterView()
     {
-        currentCenter.X = currentEye.X;
+        // currentCenter.X = currentEye.X;
         currentCenter.Y = currentEye.Y;
-        currentCenter.Z = currentEye.X + sizeVector;
+        // currentCenter.Z = currentEye.X + sizeVector;
     }
 
     // Обработка клавиш
@@ -128,7 +128,7 @@ namespace robbiespace
         }
 
         // Обработка движения мышки
-        TurnX(keyHandler->GetMouseShiftOY());
+        // TurnX(keyHandler->GetMouseShiftOY());
         TurnY(keyHandler->GetMouseShiftOX());
     }
 

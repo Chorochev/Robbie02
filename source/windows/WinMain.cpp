@@ -224,11 +224,12 @@ namespace robbiespace
         glutSpecialFunc(KeyboardSpecialFuncForWinMain);     // Установка функции для обработки нажатия специальных клавиши клавиатуры
         glutSpecialUpFunc(KeyboardSpecialUpFuncForWinMain); // Установка функции для обработки отжатия специальных клавиши клавиатуры
 
+        glutMotionFunc(MotionFuncForWinMain);      // Установка функции для отслеживания активного движения мышки (с нажатой кнопкой)
+        glutMouseWheelFunc(MouseWheelFuncWinMain); // Установка функции для обработки данных с колеса мышки
+
         //glutMouseFunc(MouseFuncForWindowGeneral);                 // Установка функции для обработки данных с мышки
-        glutMotionFunc(MotionFuncForWinMain); // Установка функции для отслеживания активного движения мышки (с нажатой кнопкой)
         //glutPassiveMotionFunc(PassiveMotionFuncForWinMain); // Установка функции для отслеживания пассивного движения мыши (без нажатия кнопки)
         //glutEntryFunc(EntryFuncForWindowGeneral);                 // Установка функции для отслеживания выхода курсора за пределы окна
-        glutMouseWheelFunc(MouseWheelFuncWinMain);
 
         glutTimerFunc(DELAY_FOR_TIMER_WINMAIN, MainTimerForWinMain, 0);
     }
