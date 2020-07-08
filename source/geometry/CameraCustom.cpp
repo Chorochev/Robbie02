@@ -31,11 +31,39 @@ namespace robbiespace
         RobVector shiftVec = addVec - normVec;
         // Сдвигаем вектора положения камеры и направление вида на вектор сдвига
         RobVector newCurrentEye = currentEye + shiftVec;
-        if (globalVectorHelper.IsInNormalRoom(newCurrentEye, 2.0f))
+        if (globalVectorHelper.IsInNormalRoom(newCurrentEye, limit))
         {
-            currentEye = newCurrentEye; 
+            currentEye = newCurrentEye;
             currentCenter = currentCenter + shiftVec;
         }
+    }
+
+    // Сдвинуть камеру вперед или назад по оси Y
+    // step - размер сдвига камеры
+    void CameraCustom::MoveY(float step)
+    {
+        // Получаем новый вектор с координатами камеры
+        //RobVector normVec = currentEye.Y + step;
+        if (step > 0.0f && ((currentEye.Y + step) > limit))
+            return;
+        if (step < 0.0f && ((currentEye.Y + step) < -limit))
+            return;
+        currentEye.Y += step;
+        currentCenter.Y += step;
+    }
+
+    // Повернуть камеру вокруг оси X
+    // shiftAngel - угол на который нужно повернуть
+    void CameraCustom::TurnX(double shiftAngel)
+    {
+        // Смещаем текущий угол - только для консоли
+        currentAngelOX = GetShiftAngel(currentAngelOX, shiftAngel);
+        // Нормализуем вектор
+        RobVector normVec = currentCenter - currentEye;
+        // Поворачиваем нормализованный вектор на заданный угол
+        RobVector newVec = globalVectorHelper.RotateX(normVec, shiftAngel);
+        // Возвращаем новый вектор на место
+        currentCenter = currentEye + newVec;
     }
 
     // Повернуть камеру вокруг оси Y
@@ -50,6 +78,14 @@ namespace robbiespace
         RobVector newVec = globalVectorHelper.RotateY(normVec, shiftAngel);
         // Возвращаем новый вектор на место
         currentCenter = currentEye + newVec;
+    }
+
+    // Установка вида паралельно земли
+    void CameraCustom::CenterView()
+    {
+        currentCenter.X = currentEye.X;
+        currentCenter.Y = currentEye.Y;
+        currentCenter.Z = currentEye.X + sizeVector;
     }
 
     // Обработка клавиш
@@ -75,6 +111,25 @@ namespace robbiespace
         {
             TurnY(shiftAngel);
         }
+
+        if (keyHandler->IsKeyPress(eKeys::PAGE_UP))
+        {
+            MoveY(speedMove);
+        }
+
+        if (keyHandler->IsKeyPress(eKeys::PAGE_DOWN))
+        {
+            MoveY(-speedMove);
+        }
+
+        if (keyHandler->IsKeyPress(eKeys::KEY_F3))
+        {
+            CenterView();
+        }
+
+        // Обработка движения мышки
+        TurnX(keyHandler->GetMouseShiftOY());
+        TurnY(keyHandler->GetMouseShiftOX());
     }
 
 } // namespace robbiespace

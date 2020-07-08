@@ -23,6 +23,20 @@ namespace robbiespace
         return newVector;
     }
 
+    // Поворот нормализованного вектора на заданный угол вокруг оси X
+    // *vec - вектор для поворота
+    // angle - угол 0 - 360 град.
+    RobVector VectorHelper::RotateX(RobVector vec, double angle)
+    {
+        double cosAng = GetCos(angle);
+        double sinAng = GetSin(angle);
+        RobVector newVector;
+        newVector.X = vec.X; 
+        newVector.Y = (vec.Y * cosAng) + (vec.Z * sinAng); 
+        newVector.Z = -(vec.Y * sinAng) + (vec.Z * cosAng);
+        return newVector;
+    }
+
     // Проверка нахождения точки в границах нормализованного куба. По умолчанию размер куба от -1 до 1;
     // pVec - координаты точки для проверки
     // size - Размер от 0 до стены куба по оси

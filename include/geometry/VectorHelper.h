@@ -20,6 +20,11 @@ namespace robbiespace
         // angle - угол 0 - 360 град.
         RobVector RotateY(RobVector vec, double angle);
 
+        // Поворот нормализованного вектора на заданный угол вокруг оси X
+        // vec - вектор для поворота
+        // angle - угол 0 - 360 град.
+        RobVector RotateX(RobVector vec, double angle);
+
         // Получение косинуса угла
         // angle - угол 0 - 360 град.
         inline double GetCos(double angle) { return cos(angle * (PI / 180.0)); };
