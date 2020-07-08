@@ -20,16 +20,13 @@ namespace robbiespace
         // Создание всех объектов сцены
         void CreateScena();
 
-        // Пол
-        void Floor();
+        // Создание тестовой сцены
+        void CreateTestScena();
 
         // Пол в клеточку
         // rows - количество строк
         // columns - количество столбцов
         void FloorCells(int rows, int columns);
-
-        // Стены
-        void Walls();
 
         // Прорисовка всей сцены
         void WorldScena();

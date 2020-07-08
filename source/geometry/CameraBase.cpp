@@ -22,12 +22,12 @@ namespace robbiespace
     {
         // Текущее положение камеры
         currentEye.X = 0.0f;
-        currentEye.Y = 0.25f;
+        currentEye.Y = 0.5f;
         currentEye.Z = -1.5f;
         // Текущая точка зрения камеры (куда камера смотрит)
         currentCenter.X = 0.0f;
-        currentCenter.Y = 0.25f;
-        currentCenter.Z = -2.0 + sizeVector;
+        currentCenter.Y = 0.5f;
+        currentCenter.Z = -1.5 + sizeVector;
         // Текущий угол поворота камеры
         currentUp.X = 0.0f;
         currentUp.Y = 1.0f;

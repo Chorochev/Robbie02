@@ -23,7 +23,8 @@ namespace robbiespace
         ////////////////////////////////////////////////////////////
         // Главное окно
         World worldScena; // класс для сцены
-        worldScena.CreateScena();
+        //worldScena.CreateScena();
+        worldScena.CreateTestScena();
         winMain.Create(&worldScena);
 
         ////////////////////////////////////////////////////////////

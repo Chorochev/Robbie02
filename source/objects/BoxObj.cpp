@@ -13,7 +13,7 @@ namespace robbiespace
     // Вывод объекта на экран
     void BoxObj::Display()
     {
-        glTranslatef(position.X, position.Y, position.Z);        
+        glTranslatef(position.X, position.Y, position.Z);
         for (size_t i = 0; i < 6; i++)
         {
             glColor3f(Sides[i].Color.X, Sides[i].Color.Y, Sides[i].Color.Z);
@@ -26,59 +26,13 @@ namespace robbiespace
         }
     }
 
-    // Установка объекта в начальное сосотояние
-    void BoxObj::SetDefault()
-    {        
-        srand(time(0));
-        int r = 20 + rand() % 60;
-        float bc = ((float)r) / 100.0f;
-        // Создаем куб с нулевым центром
-        // Устанавливаем стороны
-        Sides[0].SideBox == eSideBoxObj::Front;
-        Sides[0].Color.SetValue(bc - 0.05f, bc - 0.05f, bc - 0.075f);
-        Sides[0].Point1.SetValue(defaultBoxPoints[0]);
-        Sides[0].Point2.SetValue(defaultBoxPoints[1]);
-        Sides[0].Point3.SetValue(defaultBoxPoints[2]);
-        Sides[0].Point4.SetValue(defaultBoxPoints[3]);
-        Sides[1].SideBox == eSideBoxObj::Right;
-        Sides[1].Color.SetValue(bc + 0.05f, bc + 0.05f, bc + 0.075f);
-        Sides[1].Point1.SetValue(defaultBoxPoints[1]);
-        Sides[1].Point2.SetValue(defaultBoxPoints[5]);
-        Sides[1].Point3.SetValue(defaultBoxPoints[6]);
-        Sides[1].Point4.SetValue(defaultBoxPoints[2]);
-        Sides[2].SideBox == eSideBoxObj::Back;
-        Sides[2].Color.SetValue(bc - 0.075f, bc - 0.075f, bc - 0.075f);
-        Sides[2].Point1.SetValue(defaultBoxPoints[5]);
-        Sides[2].Point2.SetValue(defaultBoxPoints[4]);
-        Sides[2].Point3.SetValue(defaultBoxPoints[7]);
-        Sides[2].Point4.SetValue(defaultBoxPoints[6]);
-        Sides[3].SideBox == eSideBoxObj::Left;
-        Sides[3].Color.SetValue(bc + 0.075f, bc + 0.075f, bc + 0.075f);
-        Sides[3].Point1.SetValue(defaultBoxPoints[4]);
-        Sides[3].Point2.SetValue(defaultBoxPoints[0]);
-        Sides[3].Point3.SetValue(defaultBoxPoints[3]);
-        Sides[3].Point4.SetValue(defaultBoxPoints[7]);
-        Sides[4].SideBox == eSideBoxObj::Top;
-        Sides[4].Color.SetValue(bc - 0.025f, bc - 0.025f, bc - 0.025f);
-        Sides[4].Point1.SetValue(defaultBoxPoints[0]);
-        Sides[4].Point2.SetValue(defaultBoxPoints[1]);
-        Sides[4].Point3.SetValue(defaultBoxPoints[5]);
-        Sides[4].Point4.SetValue(defaultBoxPoints[4]);
-        Sides[5].SideBox == eSideBoxObj::Bottom;
-        Sides[5].Color.SetValue(bc + 0.025f, bc + 0.025f, bc + 0.025f);
-        Sides[5].Point1.SetValue(defaultBoxPoints[3]);
-        Sides[5].Point2.SetValue(defaultBoxPoints[2]);
-        Sides[5].Point3.SetValue(defaultBoxPoints[6]);
-        Sides[5].Point4.SetValue(defaultBoxPoints[7]);
-    }
-
     // Получение нового размера с учетом знака
     float BoxObj::GetNewSize(float oldSize, float newSize)
     {
-        if (oldSize >= 0.0f)
-            return newSize;
+        if (oldSize >= 0.0f && newSize > 0.0f)
+            return newSize / 2.0f;
         else
-            return -newSize;
+            return -(newSize / 2.0f);
     }
 
     // Установка размера
