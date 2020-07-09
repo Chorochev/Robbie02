@@ -65,14 +65,11 @@ namespace robbiespace
                 << " " << Sides[i].SideBox << std::endl;
             out << "Color"
                 << " " << Sides[i].Color.X << " " << Sides[i].Color.Y << " " << Sides[i].Color.Z << std::endl;
-            out << "Point1"
-                << " " << Sides[i].Point1.X << " " << Sides[i].Point1.Y << " " << Sides[i].Point1.Z << std::endl;
-            out << "Point2"
-                << " " << Sides[i].Point2.X << " " << Sides[i].Point2.Y << " " << Sides[i].Point2.Z << std::endl;
-            out << "Point3"
-                << " " << Sides[i].Point3.X << " " << Sides[i].Point3.Y << " " << Sides[i].Point3.Z << std::endl;
-            out << "Point4"
-                << " " << Sides[i].Point4.X << " " << Sides[i].Point4.Y << " " << Sides[i].Point4.Z << std::endl;
+            out << "Points" << std::endl;
+            out << Sides[i].Point1.X << " " << Sides[i].Point1.Y << " " << Sides[i].Point1.Z << std::endl;
+            out << Sides[i].Point2.X << " " << Sides[i].Point2.Y << " " << Sides[i].Point2.Z << std::endl;
+            out << Sides[i].Point3.X << " " << Sides[i].Point3.Y << " " << Sides[i].Point3.Z << std::endl;
+            out << Sides[i].Point4.X << " " << Sides[i].Point4.Y << " " << Sides[i].Point4.Z << std::endl;
             out << "SideEndBox" << std::endl;
         }
     }
@@ -97,17 +94,13 @@ namespace robbiespace
                 if (nameValue.compare("Color") == 0)
                     in >> Sides[i].Color.X >> Sides[i].Color.Y >> Sides[i].Color.Z;
 
-                if (nameValue.compare("Point1") == 0)
+                if (nameValue.compare("Points") == 0)
+                {
                     in >> Sides[i].Point1.X >> Sides[i].Point1.Y >> Sides[i].Point1.Z;
-
-                if (nameValue.compare("Point2") == 0)
                     in >> Sides[i].Point2.X >> Sides[i].Point2.Y >> Sides[i].Point2.Z;
-
-                if (nameValue.compare("Point3") == 0)
                     in >> Sides[i].Point3.X >> Sides[i].Point3.Y >> Sides[i].Point3.Z;
-
-                if (nameValue.compare("Point4") == 0)
                     in >> Sides[i].Point4.X >> Sides[i].Point4.Y >> Sides[i].Point4.Z;
+                }
 
                 if (nameValue.compare("Position") == 0)
                     in >> position.X >> position.Y >> position.Z;
