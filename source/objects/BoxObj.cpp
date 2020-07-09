@@ -60,7 +60,7 @@ namespace robbiespace
         for (size_t i = 0; i < 6; i++)
         {
             //unsigned int valSideBox = Sides[i].SideBox;
-            out << "SideBox" << " " << ((int)Sides[i].SideBox) << std::endl;
+            out << "SideBox" << " " << Sides[i].SideBox << std::endl;
             out << "Color" << " " << Sides[i].Color.X << " " << Sides[i].Color.Y << " " << Sides[i].Color.Z << std::endl;
             out << "Point1" << " " << Sides[i].Point1.X << " " << Sides[i].Point1.Y << " " << Sides[i].Point1.Z << std::endl;
             out << "Point2" << " " << Sides[i].Point2.X << " " << Sides[i].Point2.Y << " " << Sides[i].Point2.Z << std::endl;
