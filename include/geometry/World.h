@@ -38,6 +38,10 @@ namespace robbiespace
         // Имя для сохранения сцены
         void SaveScena(string name);
 
+        // Загрузка сцены
+        // Имя загружаемой сцены
+        void LoadScena(string name);
+
         // Обработка клавиш
         // keyHandler - указатель на обработчик клавиш
         void HandlerKeyPressed(KeyHandler *keyHandler);

@@ -56,15 +56,68 @@ namespace robbiespace
 
     // Сохранение объекта в поток
     void BoxObj::SaveToSteam(ofstream &out)
-    {        
+    {
+        out << "Position"
+            << " " << position.X << " " << position.Y << " " << position.Z << std::endl;
         for (size_t i = 0; i < 6; i++)
-        {           
-            out << "SideBox" << " " << Sides[i].SideBox << std::endl;
-            out << "Color" << " " << Sides[i].Color.X << " " << Sides[i].Color.Y << " " << Sides[i].Color.Z << std::endl;
-            out << "Point1" << " " << Sides[i].Point1.X << " " << Sides[i].Point1.Y << " " << Sides[i].Point1.Z << std::endl;
-            out << "Point2" << " " << Sides[i].Point2.X << " " << Sides[i].Point2.Y << " " << Sides[i].Point2.Z << std::endl;
-            out << "Point3" << " " << Sides[i].Point3.X << " " << Sides[i].Point3.Y << " " << Sides[i].Point3.Z << std::endl;
-            out << "Point4" << " " << Sides[i].Point4.X << " " << Sides[i].Point4.Y << " " << Sides[i].Point4.Z << std::endl;
+        {
+            out << "SideBox"
+                << " " << Sides[i].SideBox << std::endl;
+            out << "Color"
+                << " " << Sides[i].Color.X << " " << Sides[i].Color.Y << " " << Sides[i].Color.Z << std::endl;
+            out << "Point1"
+                << " " << Sides[i].Point1.X << " " << Sides[i].Point1.Y << " " << Sides[i].Point1.Z << std::endl;
+            out << "Point2"
+                << " " << Sides[i].Point2.X << " " << Sides[i].Point2.Y << " " << Sides[i].Point2.Z << std::endl;
+            out << "Point3"
+                << " " << Sides[i].Point3.X << " " << Sides[i].Point3.Y << " " << Sides[i].Point3.Z << std::endl;
+            out << "Point4"
+                << " " << Sides[i].Point4.X << " " << Sides[i].Point4.Y << " " << Sides[i].Point4.Z << std::endl;
+            out << "SideEndBox" << std::endl;
+        }
+    }
+
+    // Загрузка данных объекта из потока
+    void BoxObj::LoadFromSteam(ifstream &in)
+    {
+        int i = 0;
+        string nameValue;
+        while (in)
+        {
+            in >> nameValue;
+            if (nameValue.length() > 0)
+            {
+                if (nameValue.compare("SideBox") == 0)
+                {
+                    int iSideBox = 0;
+                    in >> iSideBox;
+                    Sides[i].SideBox = (eSideBoxObj)iSideBox;
+                }
+
+                if (nameValue.compare("Color") == 0)
+                    in >> Sides[i].Color.X >> Sides[i].Color.Y >> Sides[i].Color.Z;
+
+                if (nameValue.compare("Point1") == 0)
+                    in >> Sides[i].Point1.X >> Sides[i].Point1.Y >> Sides[i].Point1.Z;
+
+                if (nameValue.compare("Point2") == 0)
+                    in >> Sides[i].Point2.X >> Sides[i].Point2.Y >> Sides[i].Point2.Z;
+
+                if (nameValue.compare("Point3") == 0)
+                    in >> Sides[i].Point3.X >> Sides[i].Point3.Y >> Sides[i].Point3.Z;
+
+                if (nameValue.compare("Point4") == 0)
+                    in >> Sides[i].Point4.X >> Sides[i].Point4.Y >> Sides[i].Point4.Z;
+
+                if (nameValue.compare("Position") == 0)
+                    in >> position.X >> position.Y >> position.Z;
+
+                if (nameValue.compare("SideEndBox") == 0)
+                    i++;
+
+                if (nameValue.compare("EndBoxObj") == 0)
+                    return;
+            }
         }
     }
 

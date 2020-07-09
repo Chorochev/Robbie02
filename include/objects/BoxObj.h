@@ -34,6 +34,9 @@ namespace robbiespace
 
         // Сохранение объекта в поток
         void SaveToSteam(ofstream &out);
+
+        // Загрузка данных объекта из потока
+        void LoadFromSteam(ifstream &in);
     };
 
 } // namespace robbiespace

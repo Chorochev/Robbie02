@@ -137,12 +137,44 @@ namespace robbiespace
         list<BoxObj>::iterator ob = listObjs.begin();
         while (ob != listObjs.end())
         {
-            out << "type" << " " << "BoxObj" << ob->GetName() << std::endl;
-            out << "id" << " " << ob->GetID() << " " << "name" << ob->GetName() << std::endl;
+            int _id = ob->GetID();
+            out << "StartBoxObj" << " " << _id << std::endl;
             ob->SaveToSteam(out);
+            out << "EndBoxObj" << std::endl;
             ob++;
         }
         out.close();
+    }
+
+    // Загрузка сцены
+    // Имя загружаемой сцены
+    void World::LoadScena(string name)
+    {
+        string _path = "scena/" + name + ".scene";
+        ifstream in;
+        in.open(_path);
+        if (!in)
+        {
+            return;
+        }
+        listObjs.clear();
+        string nameValue;
+        in.precision(16);
+        while (in)
+        {
+            in >> nameValue;
+            if (nameValue.length() > 0)
+            {                
+                if (nameValue.compare("StartBoxObj") == 0)
+                {
+                    int objID = 0;
+                    in >> objID;
+                    BoxObj currentObj = BoxObj(objID);
+                    currentObj.LoadFromSteam(in);
+                    listObjs.push_back(currentObj);
+                }
+            }
+        }
     }
 
     // Обработка клавиш
@@ -160,6 +192,19 @@ namespace robbiespace
         else
         {
             isQuickSaveScena = false;
+        }
+
+        if (keyHandler->IsKeyPress(eKeys::QUICK_LOAD_SCENA))
+        {
+            if (!isQuickSaveScena)
+            {
+                LoadScena("quickSaveScena");
+                isQuickLoadScena = true;
+            }
+        }
+        else
+        {
+            isQuickLoadScena = false;
         }
     }
 
