@@ -2,3 +2,4 @@ bin/
 bin/logs
 settings.conf
 logs
+scena/quickSaveScena.scene
