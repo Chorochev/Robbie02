@@ -2,7 +2,7 @@
 #ifndef PROJECT_EVENTS_KEYHANDLER_H
 #define PROJECT_EVENTS_KEYHANDLER_H
 
-#define SIZE_STRUCTKEY_ARRAY 14
+#define SIZE_STRUCTKEY_ARRAY 17
 #define SIZE_UNKNOWN_STRUCTKEY_ARRAY 3
 
 #include <system/Structs.h>
@@ -25,6 +25,14 @@ namespace robbiespace
 
         int MouseWheelDir; // Направление колеса мыши
 
+        // Функция для обработки клавиш
+        // key - код клавиши
+        // x - координата мыши по оси X
+        // y - координата мыши по оси Y
+        // isPress - признак нажатия клавиши
+        // TypeDevice - Тип устройства
+        void FunctionKey(int key, int x, int y, bool isPress, eDeviceKey typeDevice);
+
         // Функция для обработки неизвестной клавиши
         // key - код клавиши
         // x - координата мыши по оси X
@@ -36,6 +44,11 @@ namespace robbiespace
         // Создание строки из структуры для консоли
         // rKey - структура клавиши
         std::string GetStringStructKey(StructKey rKey);
+
+        // Функция для установки позиции курсора
+        // x - координата мыши по оси X
+        // y - координата мыши по оси Y
+        void SetMousePosition(int x, int y);
 
     public:
         KeyHandler();
@@ -53,18 +66,22 @@ namespace robbiespace
         // y - координата мыши по оси Y
         // isPress - признак нажатия клавиши
         // TypeDevice - Тип устройства
-        void FunctionKeyboard(int key, int x, int y, bool isPress, eDeviceKey typeDevice);
+        inline void FunctionKeyboard(int key, int x, int y, bool isPress, eDeviceKey typeDevice) { FunctionKey(key, x, y, isPress, typeDevice); };
+
+        // Функция для обработки данных с мышки
+        void MouseFunc(int button, int state, int x, int y);
 
         // Функция для отслеживания пассивного движения мыши (с нажатой кнопкой)
         // x - координата мыши по оси X
         // y - координата мыши по оси Y
-        void MotionFunc(int x, int y);
+        inline void MotionFunc(int x, int y) { SetMousePosition(x, y); }
 
         // Функция для отслеживания пассивного движения мыши (без нажатия кнопки)
         // x - координата мыши по оси X
         // y - координата мыши по оси Y
-        void PassiveMotionFunc(int x, int y);
+        inline void PassiveMotionFunc(int x, int y) { SetMousePosition(x, y); }
 
+        // Обработка данных колеса мыши
         void MouseWheel(int button, int dir, int x, int y) { MouseWheelDir = dir; };
 
         // Получить направление вращения колеса мыши

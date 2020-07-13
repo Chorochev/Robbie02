@@ -29,7 +29,10 @@ namespace robbiespace
         KEY_F3,           // F3
         KEY_F4,           // F4
         QUICK_SAVE_SCENA, // Быстрое сохранение сцены
-        QUICK_LOAD_SCENA  // Быстрая загрузка сцены
+        QUICK_LOAD_SCENA, // Быстрая загрузка сцены
+        LEFT_BUTTON,      // Левая кнопка мыши
+        MIDDLE_BUTTON,    // Правая кнопка мыши
+        RIGHT_BUTTON      // Средняя кнопка мыши
     };
 
     // Типы устройств

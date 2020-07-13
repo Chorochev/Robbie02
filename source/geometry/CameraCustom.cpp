@@ -128,8 +128,11 @@ namespace robbiespace
         }
 
         // Обработка движения мышки
-        // TurnX(keyHandler->GetMouseShiftOY());
-        TurnY(keyHandler->GetMouseShiftOX());
+        if (keyHandler->IsKeyPress(eKeys::LEFT_BUTTON))
+        {
+            // TurnX(keyHandler->GetMouseShiftOY());
+            TurnY(keyHandler->GetMouseShiftOX());
+        }
     }
 
 } // namespace robbiespace

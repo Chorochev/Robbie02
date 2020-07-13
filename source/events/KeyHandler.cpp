@@ -36,6 +36,9 @@ namespace robbiespace
         keys[11] = {"iKeyKEY_F4", "KEY_F4", GLUT_KEY_F4, eKeys::KEY_F4, eDeviceKey::KeyboardSpec, false, 0, 0};
         keys[12] = {"iKeyQuickSaveScena", "QSaveScena", GLUT_KEY_F5, eKeys::QUICK_SAVE_SCENA, eDeviceKey::KeyboardSpec, false, 0, 0};
         keys[13] = {"iKeyQuickLoadScena", "QLoadScena", GLUT_KEY_F9, eKeys::QUICK_LOAD_SCENA, eDeviceKey::KeyboardSpec, false, 0, 0};
+        keys[14] = {"iKeyLeftButton", "LEFT_BUTTON", GLUT_LEFT_BUTTON, eKeys::LEFT_BUTTON, eDeviceKey::Mouse, false, 0, 0};
+        keys[15] = {"iKeyMiddleButton", "MIDDLE_BUTTON", GLUT_MIDDLE_BUTTON, eKeys::MIDDLE_BUTTON, eDeviceKey::Mouse, false, 0, 0};
+        keys[16] = {"iKeyRightButton", "RIGHT_BUTTON", GLUT_RIGHT_BUTTON, eKeys::RIGHT_BUTTON, eDeviceKey::Mouse, false, 0, 0};
 
         // Неопознанные клавиши
         unknownKeys[0] = {"iKeyUnknown1", "Unknown1", 0, eKeys::Unknown, eDeviceKey::Unknown, false, 0, 0};
@@ -67,13 +70,13 @@ namespace robbiespace
         }
     }
 
-    // Функция для обработки клавиш клавиатуры
+    // Функция для обработки клавиш
     // key - код клавиши
     // x - координата мыши по оси X
     // y - координата мыши по оси Y
     // isPress - признак нажатия клавиши
     // TypeDevice - Тип устройства
-    void KeyHandler::FunctionKeyboard(int key, int x, int y, bool isPress, eDeviceKey typeDevice)
+    void KeyHandler::FunctionKey(int key, int x, int y, bool isPress, eDeviceKey typeDevice)
     {
         bool isUnknown = true; // Флаг определяет нажатие знакомой клавиши
         for (size_t i = 0; i < sizeKeys; i++)
@@ -147,24 +150,20 @@ namespace robbiespace
         return false;
     }
 
-    // Функция для отслеживания пассивного движения мыши (с нажатой кнопкой)
-    // x - координата мыши по оси X
-    // y - координата мыши по оси Y
-    void KeyHandler::MotionFunc(int x, int y)
+    // Функция для обработки данных с мышки
+    void KeyHandler::MouseFunc(int button, int state, int x, int y)
     {
-        mouseIsChangedOX = true;     // Устанавливаем флаг указывающий на изменение координат мышки
-        mouseIsChangedOY = true;     // Устанавливаем флаг указывающий на изменение координат мышки
-        oldMouseOX = currentMouseOX; // Запоминаем положение мышки по оси X
-        oldMouseOY = currentMouseOY; // Запоминаем положение мышки по оси Y
+        if (state == GLUT_DOWN)
+            FunctionKeyboard(button, x, y, true, eDeviceKey::Mouse);
 
-        currentMouseOX = x; // Запоминаем положение мышки по оси X
-        currentMouseOY = y; // Запоминаем положение мышки по оси Y
+        if (state == GLUT_UP)
+            FunctionKeyboard(button, x, y, false, eDeviceKey::Mouse);
     }
 
-    // Функция для отслеживания пассивного движения мыши (без нажатия кнопки)
+    // Функция для установки позиции курсора
     // x - координата мыши по оси X
     // y - координата мыши по оси Y
-    void KeyHandler::PassiveMotionFunc(int x, int y)
+    void KeyHandler::SetMousePosition(int x, int y)
     {
         mouseIsChangedOX = true;     // Устанавливаем флаг указывающий на изменение координат мышки
         mouseIsChangedOY = true;     // Устанавливаем флаг указывающий на изменение координат мышки
@@ -220,7 +219,7 @@ namespace robbiespace
     // Сообщение для консоли
     string KeyHandler::GetMessageForConsole()
     {
-        string resultStr = "";
+        string resultStr = "Mouse [" + std::to_string(currentMouseOX) + ";" + std::to_string(currentMouseOY) + "] ";
         bool isFirst = true;
         for (size_t i = 0; i < sizeKeys; i++)
         {
@@ -263,7 +262,7 @@ namespace robbiespace
     // Создание строки из структуры для консоли
     string KeyHandler::GetStringStructKey(StructKey rKey)
     {
-        string result = "Mouse [" + std::to_string(currentMouseOX) + ";" + std::to_string(currentMouseOY) + "] ";
+        string result = "";
         result += "Keys (";
         result += std::to_string(rKey.Value);
 
