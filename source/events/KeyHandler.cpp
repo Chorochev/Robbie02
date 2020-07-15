@@ -21,10 +21,6 @@ namespace robbiespace
         currentColorPixel[1] = 0.0f;
         currentColorPixel[2] = 0.0f;
         currentColorPixel[3] = 0.0f;
-
-        currentPositionMouse3D[0] = 0.0f;
-        currentPositionMouse3D[1] = 0.0f;
-        currentPositionMouse3D[2] = 0.0f;
     }
 
     // Установка клавиш по умолчанию
@@ -225,7 +221,7 @@ namespace robbiespace
     }
 
     // Получение 3-х мерных координат мыши
-    void KeyHandler::GetMousePosition3D()
+    void KeyHandler::FindMousePosition3D()
     {      
         GLint viewport[4];
         GLdouble modelview[16];
@@ -241,9 +237,9 @@ namespace robbiespace
         winY = (float)viewport[3] - (float)currentMouseOY;
         glReadPixels(currentMouseOX, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ);
         gluUnProject(winX, winY, winZ, modelview, projection, viewport, &posX, &posY, &posZ);
-        currentPositionMouse3D[0] = posX;
-        currentPositionMouse3D[1] = posY;
-        currentPositionMouse3D[2] = posZ;
+        CurrentPositionMouse3D.X = (float)posX;
+        CurrentPositionMouse3D.Y = (float)posY;
+        CurrentPositionMouse3D.Z = (float)posZ;
     }
 
     // Сообщение для консоли
@@ -255,7 +251,7 @@ namespace robbiespace
         // Текущий цвет
         strMessage << "Color(" << currentColorPixel[0] << ";" << currentColorPixel[1] << ";" << currentColorPixel[2] << ";" << currentColorPixel[3] << ") ";
         // Текущая координата 3D
-        strMessage << "Pos3D[" << currentPositionMouse3D[0] << ";" << currentPositionMouse3D[1] << ";" << currentPositionMouse3D[2] << "] ";
+        strMessage << "Pos3D[" << CurrentPositionMouse3D.X << ";" << CurrentPositionMouse3D.Y << ";" << CurrentPositionMouse3D.Z << "] ";
         bool isFirst = true;
         for (size_t i = 0; i < sizeKeys; i++)
         {

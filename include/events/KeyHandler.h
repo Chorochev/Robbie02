@@ -8,6 +8,7 @@
 #include <GL/freeglut.h>
 
 #include <system/Structs.h>
+#include <geometry/RobVector.h>
 
 namespace robbiespace
 {
@@ -28,8 +29,6 @@ namespace robbiespace
         int MouseWheelDir; // Направление колеса мыши
 
         float currentColorPixel[4]; // Текущий цвет пикселя под мышкой
-
-        float currentPositionMouse3D[3]; // Текущая координата 3D под мышкой
 
         // Функция для обработки клавиш
         // key - код клавиши
@@ -61,6 +60,8 @@ namespace robbiespace
 
         const int sizeUnknownKeys = SIZE_UNKNOWN_STRUCTKEY_ARRAY; // Количество элеметов массива клавиш
         const int sizeKeys = SIZE_STRUCTKEY_ARRAY;                // Количество элеметов массива клавиш
+
+        RobVector CurrentPositionMouse3D; // Текущая координата 3D под мышкой
 
         void SetDefaultKeys(); // Установка клавиш по умолчанию
         void LoadKeyValues();  // Загрузка значений клавиш из файла конфигурации
@@ -104,7 +105,7 @@ namespace robbiespace
         inline void GetColorMousePosition(int screenHeight) { glReadPixels(currentMouseOX, (screenHeight - currentMouseOY), 1, 1, GL_RGB, GL_FLOAT, &currentColorPixel); }
 
         // Получение 3-х мерных координат мыши
-        void GetMousePosition3D();
+        void FindMousePosition3D();
 
         // Функция для проверки нажатия клавиши
         // key - тип клавиши
