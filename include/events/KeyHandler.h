@@ -29,6 +29,8 @@ namespace robbiespace
 
         float currentColorPixel[4]; // Текущий цвет пикселя под мышкой
 
+        float currentPositionMouse3D[3]; // Текущая координата 3D под мышкой
+
         // Функция для обработки клавиш
         // key - код клавиши
         // x - координата мыши по оси X
@@ -100,7 +102,10 @@ namespace robbiespace
         // Получение цвета пикселя под координатами мыши
         // screenHeight - высота экрана
         inline void GetColorMousePosition(int screenHeight) { glReadPixels(currentMouseOX, (screenHeight - currentMouseOY), 1, 1, GL_RGB, GL_FLOAT, &currentColorPixel); }
-       
+
+        // Получение 3-х мерных координат мыши
+        void GetMousePosition3D();
+
         // Функция для проверки нажатия клавиши
         // key - тип клавиши
         bool IsKeyPress(eKeys key);

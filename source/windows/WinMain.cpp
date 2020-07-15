@@ -130,6 +130,7 @@ namespace robbiespace
             camera->SetPositionDefault();
 
         keyHandler.GetColorMousePosition(iWindowSizeHeight);
+        keyHandler.GetMousePosition3D();
         
         if (keyHandler.IsKeyPress(eKeys::Exit))
         {
