@@ -1,5 +1,4 @@
-#include <GL/freeglut.h>
-
+#include <sstream>
 #include <system/Settings.h>
 #include <events/KeyHandler.h>
 
@@ -17,6 +16,11 @@ namespace robbiespace
         oldMouseOY = 0;     // Предыдущее положение мышки по оси Y
 
         int MouseWheelDir = 0; // Направление колеса мыши
+
+        currentColorPixel[0] = 0.0f;
+        currentColorPixel[1] = 0.0f;
+        currentColorPixel[2] = 0.0f;
+        currentColorPixel[3] = 0.0f;
     }
 
     // Установка клавиш по умолчанию
@@ -215,11 +219,15 @@ namespace robbiespace
         }
         return result;
     }
-
+    
     // Сообщение для консоли
     string KeyHandler::GetMessageForConsole()
     {
-        string resultStr = "Mouse [" + std::to_string(currentMouseOX) + ";" + std::to_string(currentMouseOY) + "] ";
+        stringstream strMessage;
+        strMessage.precision(2);
+        strMessage << "Mouse [" << currentMouseOX << ";" << currentMouseOY << "] ";
+        // Текущий цвет
+        strMessage << "Color(" << currentColorPixel[0] << "," << currentColorPixel[1] << "," << currentColorPixel[2] << "," << currentColorPixel[3] << ") ";
         bool isFirst = true;
         for (size_t i = 0; i < sizeKeys; i++)
         {
@@ -228,13 +236,13 @@ namespace robbiespace
                 if (isFirst)
                     isFirst = false;
                 else
-                    resultStr += ", ";
+                    strMessage << ", ";
 
-                resultStr += "[" + keys[i].Code + "=" + GetStringStructKey(keys[i]) + "]";
+                strMessage << "[" + keys[i].Code << "=" << GetStringStructKey(keys[i]) << "]";
             }
         }
         if (isFirst == false)
-            resultStr += ";";
+            strMessage << ";";
 
         isFirst = true;
         for (size_t i = 0; i < sizeUnknownKeys; i++)
@@ -243,20 +251,20 @@ namespace robbiespace
             {
                 if (isFirst)
                 {
-                    resultStr += "[Unknowns:";
+                    strMessage << "[Unknowns:";
                     isFirst = false;
                 }
                 else
                 {
-                    resultStr += ",";
+                    strMessage << ",";
                 }
-                resultStr += GetStringStructKey(unknownKeys[i]);
+                strMessage << GetStringStructKey(unknownKeys[i]);
             }
         }
         if (isFirst == false)
-            resultStr += "]";
+            strMessage << "]";
 
-        return resultStr;
+        return strMessage.str();
     }
 
     // Создание строки из структуры для консоли

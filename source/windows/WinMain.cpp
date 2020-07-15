@@ -128,6 +128,8 @@ namespace robbiespace
 
         if (keyHandler.IsKeyPress(eKeys::KEY_F4))
             camera->SetPositionDefault();
+
+        keyHandler.GetColorMousePosition(iWindowSizeHeight);
         
         if (keyHandler.IsKeyPress(eKeys::Exit))
         {
