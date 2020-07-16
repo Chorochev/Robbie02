@@ -131,7 +131,7 @@ namespace robbiespace
 
         keyHandler.GetColorMousePosition(iWindowSizeHeight);
         keyHandler.FindMousePosition3D();
-        
+
         if (keyHandler.IsKeyPress(eKeys::Exit))
         {
             CloseWindow();
@@ -241,14 +241,20 @@ namespace robbiespace
         glutSpecialFunc(KeyboardSpecialFuncForWinMain);     // Установка функции для обработки нажатия специальных клавиши клавиатуры
         glutSpecialUpFunc(KeyboardSpecialUpFuncForWinMain); // Установка функции для обработки отжатия специальных клавиши клавиатуры
 
-        glutMotionFunc(MotionFuncForWinMain);      // Установка функции для отслеживания активного движения мышки (с нажатой кнопкой)
-        glutMouseWheelFunc(MouseWheelFuncWinMain); // Установка функции для обработки данных с колеса мышки
-        glutMouseFunc(MouseFuncForWinMain);                 // Установка функции для обработки данных с мышки
+        glutMotionFunc(MotionFuncForWinMain);            // Установка функции для отслеживания активного движения мышки (с нажатой кнопкой)
+        glutMouseWheelFunc(MouseWheelFuncWinMain);       // Установка функции для обработки данных с колеса мышки
+        glutMouseFunc(MouseFuncForWinMain);              // Установка функции для обработки данных с мышки
         glutPassiveMotionFunc(PassiveMotionFuncWinMain); // Установка функции для отслеживания пассивного движения мыши (без нажатия кнопки)
 
         //glutEntryFunc(EntryFuncForWindowGeneral);                 // Установка функции для отслеживания выхода курсора за пределы окна
 
         glutTimerFunc(DELAY_FOR_TIMER_WINMAIN, MainTimerForWinMain, 0);
+    }
+
+    // Создание внутренних окон
+    void WinMain::CreateSubWindows()
+    {
+        subWinTopView.Create(idWindow, worldScena); // Окно для вида сверху
     }
 
 } // namespace robbiespace

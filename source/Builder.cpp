@@ -26,9 +26,7 @@ namespace robbiespace
         //worldScena.CreateScena();
         worldScena.CreateTestScena();
         winMain.Create(&worldScena);
-        ////////////////////////////////////////////////////////////
-        // Окно для вида сверху
-        subWinTopView.Create(winMain.GetIdWindow(), &worldScena);
+        winMain.CreateSubWindows(); // Создание внутренних окон       
         ////////////////////////////////////////////////////////////
         // Главный цикл
         glutMainLoop();

@@ -11,6 +11,7 @@
 #include <geometry/CameraCustom.h>
 #include <geometry/CameraGlut.h>
 #include <events/KeyHandler.h>
+#include <windows/SubWinTopView.h>
 
 namespace robbiespace
 {
@@ -27,6 +28,8 @@ namespace robbiespace
 
         void countFPS(); // Счетчик FPS
 
+        SubWinTopView subWinTopView; // Внутреннее окно для вида сверху
+
     public:
         WinMain();
 
@@ -37,6 +40,9 @@ namespace robbiespace
 
         // Создание окна
         void Create(World *world);
+
+        // Создание внутренних окон
+        void CreateSubWindows();
 
         // Функция рисования
         void DisplayFunc();
