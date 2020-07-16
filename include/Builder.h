@@ -3,13 +3,15 @@
 #define PROJECT_BUILDER_H
 
 #include <windows/WinMain.h>
+#include <windows/SubWinTopView.h>
 
 namespace robbiespace
 {
     class Builder
     {
     private:
-        WinMain winMain; // Основное окно
+        WinMain winMain;             // Основное окно
+        SubWinTopView subWinTopView; // Окно для вида сверху
 
     public:
         Builder();

@@ -38,6 +38,8 @@ namespace robbiespace
         WinBase(string name, string m, int width, int height, int posX, int posY);
         ~WinBase();
         void CloseWindow(); // Закрыть окно
+
+        inline int GetIdWindow() { return idWindow; };
     };
 
 } // namespace robbiespace
