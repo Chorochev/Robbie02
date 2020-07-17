@@ -99,6 +99,8 @@ namespace robbiespace
         gluPerspective(camera->Zoom, ratio, 0.1, 100.0);
         // вернуться к модели
         glMatrixMode(GL_MODELVIEW);
+
+        subWinTopView.ChangeSizeWindow(width, height); // Внутреннее окно для вида сверху
     }
 
     // Основной таймер

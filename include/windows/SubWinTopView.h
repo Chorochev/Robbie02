@@ -26,10 +26,23 @@ namespace robbiespace
         // Функция рисования
         void DisplayFunc();
 
-        //Функция изменения размеров окна
+        // Функция изменения размеров окна
         // width - Новый размер окна по ширине
         // height - Новый размер окна по высоте
         void ReshapeFunc(int width, int height);
+
+        // Изменение размеров и местоположение окна
+        // parentWidth - Ширина главного окна
+        // parentHeight - Высота главного окна
+        void ChangeSizeWindow(int parentWidth, int parentHeight);
+
+        // Изменение размеров окна по ширине
+        // newWidth - Ширина окна
+        inline void ChangeWidthWindow(int newWidth) { iWindowSizeWidth = newWidth; }
+
+        // Изменение размеров окна по высоте
+        // newHeight - Высота окна
+        inline void ChangeHeightWindow(int newHeight) { iWindowSizeHeight = newHeight; }
 
         // Основной таймер
         void MainTimer(int value);

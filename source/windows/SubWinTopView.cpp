@@ -66,6 +66,19 @@ namespace robbiespace
         glMatrixMode(GL_MODELVIEW);
     }
 
+    // Изменение размеров и местоположение окна
+    // parentWidth - Ширина главного окна
+    // parentHeight - Высота главного окна
+    void SubWinTopView::ChangeSizeWindow(int parentWidth, int parentHeight)
+    {
+        glutSetWindow(idWindow);       
+        // Местоположение окна       
+        iWindowPositionX = parentWidth - iWindowSizeWidth;// Позиция окна по OX
+        iWindowPositionY = 0;// Позиция окна по OY
+        glutPositionWindow(iWindowPositionX, iWindowPositionY);
+        glutReshapeWindow(iWindowSizeWidth, iWindowSizeHeight);
+    }
+
     // Основной таймер
     void SubWinTopView::MainTimer(int value)
     {
