@@ -13,9 +13,7 @@ namespace robbiespace
     {
     protected:
         string nameCamera; // Наименование камеры
-
-        RobVector currentEye;    // Текущее положение камеры
-        RobVector currentCenter; // Текущая точка зрения камеры (куда камера смотрит)
+        
         RobVector currentUp;     // Текущий угол поворота камеры
 
         const float sizeVector = 1.0f; // размер нормализованного вектора
@@ -38,6 +36,9 @@ namespace robbiespace
         // shift_angel - Угол поворота камеры
         CameraBase(float speed_move, double shift_angel);
 
+        RobVector currentEye;    // Текущее положение камеры
+        RobVector currentCenter; // Текущая точка зрения камеры (куда камера смотрит)
+        
         double Zoom; // Зум камеры
 
         // Установка настроек камеры по умолчанию

@@ -43,9 +43,13 @@ namespace robbiespace
 
     // Функция для рисования дополнения
     void SubWinTopView::Draw()
-    {        
-        glColor3f(1.0f, 1.0f, 1.0f);        
-        glutWireCube(1.0f); // Рисуется проволочный куб со стороной 1       
+    {
+        glColor3f(1.0f, 1.0f, 1.0f);
+        glLineWidth(3);
+        glBegin(GL_LINES);
+        glVertex3f(cameraWinMain->currentEye.X, cameraWinMain->currentEye.Y, cameraWinMain->currentEye.Z);
+        glVertex3f(cameraWinMain->currentCenter.X, cameraWinMain->currentCenter.Y, cameraWinMain->currentCenter.Z);
+        glEnd();
     }
 
     //Функция изменения размеров окна
@@ -92,6 +96,7 @@ namespace robbiespace
     // Основной таймер
     void SubWinTopView::MainTimer(int value)
     {
+        glutSetWindow(idWindow);
         glutPostRedisplay();
     }
 

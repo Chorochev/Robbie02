@@ -20,6 +20,8 @@ namespace robbiespace
         frameFPS = 0;    //  количество кадров в секунду
         timebaseFPS = 0; // время, когда мы в последний раз вычислили частоту кадров.
         FPS = 0;         // FPS
+
+        subWinTopView.SetCameraWinMain(camera);
     }
     // Счетчик FPS
     void WinMain::countFPS()
@@ -115,10 +117,16 @@ namespace robbiespace
         worldScena->HandlerKeyPressed(&keyHandler);
 
         if (keyHandler.IsKeyPress(eKeys::KEY_F1))
+        {
             camera = &cameraCustom; // Переключаемся на ручную камеру
+            subWinTopView.SetCameraWinMain(camera);
+        }
 
         if (keyHandler.IsKeyPress(eKeys::KEY_F2))
+        {
             camera = &cameraGlut; // Переключаемся на камеру glut
+            subWinTopView.SetCameraWinMain(camera);
+        }
 
         int wheelDir = keyHandler.GetDirectionMouseWheel();
         int newZoom = camera->Zoom + (5 * wheelDir);
