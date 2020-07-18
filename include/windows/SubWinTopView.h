@@ -17,6 +17,7 @@ namespace robbiespace
         CameraCustom camera = CameraCustom(0.07f, 1.5); // Класс камеры
 
         CameraBase *cameraWinMain; // Камера вида основного окна
+        KeyHandler *keyHandler;    // Указатель на обработчик клавиш
 
         // Функция для рисования дополнения
         void Draw();
@@ -51,8 +52,12 @@ namespace robbiespace
         inline void ChangeHeightWindow(int newHeight) { iWindowSizeHeight = newHeight; }
 
         // Устанока ссылки на камеру основного вида
-        // CameraWinMain - Указатель на камеру главного окна
-        inline void SetCameraWinMain(CameraBase *CameraWinMain) { cameraWinMain = CameraWinMain; }
+        // pCameraWinMain - Указатель на камеру главного окна
+        inline void SetCameraWinMain(CameraBase *pCameraWinMain) { cameraWinMain = pCameraWinMain; }
+
+        // Устанока ссылки на обработчик клавиш
+        // pKeyHandler - Указатель на камеру главного окна
+        inline void SetKeyHandler(KeyHandler *pKeyHandler) { keyHandler = pKeyHandler; }
 
         // Основной таймер
         void MainTimer(int value);

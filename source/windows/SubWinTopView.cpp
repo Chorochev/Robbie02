@@ -16,7 +16,7 @@ namespace robbiespace
         camera.SetPositionCenter(posCenter);
 
         RobVector posEye;
-        posEye.SetValue(0.0f, 3.5f, 0.001f); // Месторасположение камеры
+        posEye.SetValue(0.0f, 3.0f, 0.001f); // Месторасположение камеры
         camera.SetPositionEye(posEye);
     }
 
@@ -47,8 +47,15 @@ namespace robbiespace
         glColor3f(1.0f, 1.0f, 1.0f);
         glLineWidth(3);
         glBegin(GL_LINES);
+        // Линия взгляда камеры
         glVertex3f(cameraWinMain->currentEye.X, cameraWinMain->currentEye.Y, cameraWinMain->currentEye.Z);
         glVertex3f(cameraWinMain->currentCenter.X, cameraWinMain->currentCenter.Y, cameraWinMain->currentCenter.Z);
+        glEnd();
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glBegin(GL_LINES);
+        // Линия от камеры в точку курсора
+        glVertex3f(cameraWinMain->currentEye.X, cameraWinMain->currentEye.Y, cameraWinMain->currentEye.Z);
+        glVertex3f(keyHandler->CurrentPositionMouse3D.X, keyHandler->CurrentPositionMouse3D.Y, keyHandler->CurrentPositionMouse3D.Z);
         glEnd();
     }
 
@@ -132,6 +139,10 @@ namespace robbiespace
     {
         worldScena = world;
         idWindow = glutCreateSubWindow(idMainWindow, iWindowPositionX, iWindowPositionY, iWindowSizeWidth, iWindowSizeHeight);
+        // Включаем отсечение. *включать нужно после создания окна.
+        glEnable(GL_DEPTH_TEST);
+        // Отсечение прорисовки внутренней стороны полигона (со спины)
+        glEnable(GL_CULL_FACE);
         glutDisplayFunc(DisplayFuncForSubWinTopView);
         glutReshapeFunc(ReshapeFuncForSubWinTopView);
         glutTimerFunc(DELAY_FOR_TIMER_SUBWINTOPVIEW, MainTimerForSubWinTopView, 0);

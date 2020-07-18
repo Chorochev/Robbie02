@@ -22,6 +22,7 @@ namespace robbiespace
         FPS = 0;         // FPS
 
         subWinTopView.SetCameraWinMain(camera);
+        subWinTopView.SetKeyHandler(&keyHandler);
     }
     // Счетчик FPS
     void WinMain::countFPS()
@@ -141,12 +142,11 @@ namespace robbiespace
 
         keyHandler.GetColorMousePosition(iWindowSizeHeight);
         keyHandler.FindMousePosition3D();
-        
-        if (keyHandler.IsKeyPress(eKeys::Exit))        
-            CloseWindow();        
-        else        
+
+        if (keyHandler.IsKeyPress(eKeys::Exit))
+            CloseWindow();
+        else
             glutPostRedisplay();
-        
     }
 
     /////////////////////////////////////////////////////////////////////////////////////
