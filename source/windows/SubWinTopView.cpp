@@ -7,7 +7,7 @@ namespace robbiespace
     // передачу не статических функций класса в методы glut-а.
     SubWinTopView *subWinTopViewPoint;
 
-    SubWinTopView::SubWinTopView() : WinBase("SubWinTopView", "subWTV", 200, 200, 200, 200)
+    SubWinTopView::SubWinTopView() : WinBase("SubWinTopView", "subWTV", 250, 250, 200, 200)
     {
         subWinTopViewPoint = this;
 
@@ -16,7 +16,7 @@ namespace robbiespace
         camera.SetPositionCenter(posCenter);
 
         RobVector posEye;
-        posEye.SetValue(0.0f, 3.0f, 0.001f); // Месторасположение камеры
+        posEye.SetValue(0.0f, 3.5f, 0.001f); // Месторасположение камеры
         camera.SetPositionEye(posEye);
     }
 
@@ -34,8 +34,18 @@ namespace robbiespace
         glPushMatrix();
         worldScena->WorldScena();
         glPopMatrix();
+
+        Draw();
+
         // Переключение буферов
         glutSwapBuffers();
+    }
+
+    // Функция для рисования дополнения
+    void SubWinTopView::Draw()
+    {        
+        glColor3f(1.0f, 1.0f, 1.0f);        
+        glutWireCube(1.0f); // Рисуется проволочный куб со стороной 1       
     }
 
     //Функция изменения размеров окна
@@ -71,10 +81,10 @@ namespace robbiespace
     // parentHeight - Высота главного окна
     void SubWinTopView::ChangeSizeWindow(int parentWidth, int parentHeight)
     {
-        glutSetWindow(idWindow);       
-        // Местоположение окна       
-        iWindowPositionX = parentWidth - iWindowSizeWidth;// Позиция окна по OX
-        iWindowPositionY = 0;// Позиция окна по OY
+        glutSetWindow(idWindow);
+        // Местоположение окна
+        iWindowPositionX = parentWidth - iWindowSizeWidth; // Позиция окна по OX
+        iWindowPositionY = 0;                              // Позиция окна по OY
         glutPositionWindow(iWindowPositionX, iWindowPositionY);
         glutReshapeWindow(iWindowSizeWidth, iWindowSizeHeight);
     }

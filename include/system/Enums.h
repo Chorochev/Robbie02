@@ -24,10 +24,10 @@ namespace robbiespace
         KEY_DOWN,         // Стрелка вниз
         PAGE_UP,          // Вверх
         PAGE_DOWN,        // Вниз
-        KEY_F1,           // F1
-        KEY_F2,           // F2
-        KEY_F3,           // F3
-        KEY_F4,           // F4
+        KEY_F1,           // F1 - Включение первой камеры
+        KEY_F2,           // F2 - Включение второй камеры
+        KEY_F3,           // F3 - Центрование вида камеры
+        KEY_F4,           // F4 - Установка вида камеры по умолчанию
         QUICK_SAVE_SCENA, // Быстрое сохранение сцены
         QUICK_LOAD_SCENA, // Быстрая загрузка сцены
         LEFT_BUTTON,      // Левая кнопка мыши

@@ -15,6 +15,10 @@ namespace robbiespace
     private:
         World *worldScena;                              // Указатель на класс для сцены
         CameraCustom camera = CameraCustom(0.07f, 1.5); // Класс камеры
+
+        // Функция для рисования дополнения
+        void Draw();
+
     public:
         SubWinTopView();
 
@@ -43,7 +47,7 @@ namespace robbiespace
         // Изменение размеров окна по высоте
         // newHeight - Высота окна
         inline void ChangeHeightWindow(int newHeight) { iWindowSizeHeight = newHeight; }
-
+      
         // Основной таймер
         void MainTimer(int value);
     };
