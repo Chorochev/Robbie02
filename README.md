@@ -13,8 +13,8 @@ This is 3D-scene
 *) The library needs put to the folder "bin". If the folder "bin" don't exist, create it in the root of the project.
 
 # Compilation
-The project's settings lie in folder ".vs code".
-You need to rewrite paths for compilation.
+The project's settings lie in folder ".vs code".</br>
+<b>You need to rewrite paths for compilation!!!</b></br>
 Write yours path to the "gcc" compiler:
 - "c_cpp_properties.json" setting "compilerPath"
 - "launch.json" setting "miDebuggerPath"
@@ -25,7 +25,7 @@ Write yours path to the "gcc" compiler:
 - Run without debugging "Ctrl+F5"
 
 # The project content.
-- The function "main" lie in file "Robbie.cpp"
+- The function "main" lies in file "Robbie.cpp"
 - The folder "include" contains headers files.
 - The folder "source" contains code:
 - - "events" - handling keyboard and mouse events.
