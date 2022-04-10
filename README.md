@@ -2,7 +2,7 @@
 # This project isn't finished!!!
 
 # What is it?
-This is 3D-scene
+This is 3D-scene.
 
 # Development
 - language: c++
@@ -16,16 +16,16 @@ This is 3D-scene
 The project's settings lie in folder ".vs code".</br>
 <b>You need to rewrite paths for compilation!!!</b></br>
 Write yours path to the "gcc" compiler:
-- "c_cpp_properties.json" setting "compilerPath"
-- "launch.json" setting "miDebuggerPath"
-- "tasks.json" setting "label" и "command"
+- "c_cpp_properties.json" setting "compilerPath".
+- "launch.json" setting "miDebuggerPath".
+- "tasks.json" setting "label" и "command".
 
 # Run projects in Visual Studio Code:
-- Start debugging "F5"
-- Run without debugging "Ctrl+F5"
+- Start debugging "F5".
+- Run without debugging "Ctrl+F5".
 
 # The project content.
-- The function "main" lies in file "Robbie.cpp"
+- The function "main" lies in file "Robbie.cpp".
 - The folder "include" contains headers files.
 - The folder "source" contains code:
 - - "events" - handling keyboard and mouse events.
@@ -36,9 +36,9 @@ Write yours path to the "gcc" compiler:
 
 # After compilation and launch, the following files and folders will be created in the "bin" folder:
 - folder "logs" - text logs ("DD-MM-YYYY.logs").
-- folder "scena" - for save scene (format file - txt).
+- folder "scena" - for the save scene (format file - txt).
 - freeglut.dll - the OpenGL library.
-- "Robbie.exe" - executable file
+- "Robbie.exe" - the executable file.
 - "settings.conf" - application settings (keyboard shortcuts, window sizes).
 
 # Default keyboard shortcuts ("~/source/events/KeyHandler.cpp")
