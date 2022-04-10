@@ -54,3 +54,6 @@ Write yours path to the "gcc" compiler:
 - Centering the camera view="F3"
 - Setting the default camera view="F4"
 - Quick loading of the scene="F5"
+
+# Scene
+![scene](https://github.com/Chorochev/Robbie02/blob/master/scene.png)
